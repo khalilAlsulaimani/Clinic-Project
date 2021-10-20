@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppCode.OwnerScreenController">
+    <children>
+      <MenuBar layoutX="69.0" layoutY="1.0" prefHeight="26.0" prefWidth="600.0" AnchorPane.bottomAnchor="403.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#signOutButton" text="Sign Out" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Edit Account">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Edit Password" />
+                  <MenuItem mnemonicParsing="false" text="Edit Username" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Doctors">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Add Doctor" />
+                  <MenuItem mnemonicParsing="false" text="Edit Doctor" />
+                  <MenuItem mnemonicParsing="false" text="Delete Doctor" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Employees">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToAddEmployee" text="Add Employee" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToEditEmployee" text="Edit Employee" />
+              <MenuItem mnemonicParsing="false" onAction="#goToDeleteEmployee" text="Delete Employee" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label fx:id="welcomeLabel" layoutX="14.0" layoutY="54.0" prefHeight="18.0" prefWidth="94.0" />
+   </children>
+</AnchorPane>

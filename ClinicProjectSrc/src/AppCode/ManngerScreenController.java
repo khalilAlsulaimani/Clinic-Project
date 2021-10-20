@@ -11,21 +11,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author alsul
  */
-public class LogInScreenController implements Initializable {
+public class ManngerScreenController implements Initializable {
 
     @FXML
-    private TextField usernamePassword;
-    @FXML
-    private TextField passwordInput;
-    @FXML
-    private Label errorLabel;
+    private Label welcomeLabel;
 
     /**
      * Initializes the controller class.
@@ -35,12 +30,5 @@ public class LogInScreenController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void signInButton(ActionEvent event) {
-    }
-
-    @FXML
-    private void clearSignIn(ActionEvent event) {
-    }
     
 }
