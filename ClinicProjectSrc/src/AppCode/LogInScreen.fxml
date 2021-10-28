@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="AppCode.LogInScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppCode.LogInScreenController">
    <children>
-      <TextField fx:id="usernamePassword" layoutX="226.0" layoutY="174.0" promptText="enter username" />
+      <TextField fx:id="usernameInput" layoutX="226.0" layoutY="174.0" promptText="enter username" />
       <Label layoutX="247.0" layoutY="30.0" text="Sign In ">
          <font>
             <Font size="33.0" />
@@ -18,7 +17,10 @@
       <TextField fx:id="passwordInput" layoutX="226.0" layoutY="244.0" promptText="enter password" />
       <Label layoutX="132.0" layoutY="178.0" text="Username :" />
       <Label layoutX="134.0" layoutY="248.0" text="Password :" />
-      <Label fx:id="errorLabel" layoutX="286.0" layoutY="118.0" />
+      <Label fx:id="errorLabel" layoutX="141.0" layoutY="102.0" prefHeight="27.0" prefWidth="321.0" textAlignment="CENTER" textFill="RED" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
       <Button defaultButton="true" layoutX="219.0" layoutY="323.0" mnemonicParsing="false" onAction="#signInButton" text="Sign In" />
       <Button defaultButton="true" layoutX="329.0" layoutY="323.0" mnemonicParsing="false" onAction="#clearSignIn" text="Clear" />
    </children>
