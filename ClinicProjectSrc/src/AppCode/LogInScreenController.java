@@ -48,11 +48,12 @@ public class LogInScreenController implements Initializable {
             ((Node) event.getSource()).getScene().getWindow().hide();
 
             Parent root = loader.load();
-            ManngerScreenController manngerScreen = loader.getController();
+            OwnerScreenController ownerScreen = loader.getController();
 
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setTitle("Icare ");
             stage.show();
 
         } else if (username.startsWith("MAN")) {
@@ -64,17 +65,21 @@ public class LogInScreenController implements Initializable {
 
             Stage stage = new Stage();
             Scene scene = new Scene(root);
+            stage.setTitle("Icare ");
+
             stage.setScene(scene);
             stage.show();
         } else if (username.startsWith("REP")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
             ((Node) event.getSource()).getScene().getWindow().hide();
-            
+
             Parent root = loader.load();
-            ReceptionScreenController manngerScreen = loader.getController();
-            
+            ReceptionScreenController receptionScreen = loader.getController();
+
             Stage stage = new Stage();
             Scene scene = new Scene(root);
+            stage.setTitle("Icare ");
+
             stage.setScene(scene);
             stage.show();
         } else {
