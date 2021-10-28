@@ -16,22 +16,19 @@ import javafx.stage.Stage;
  * @author alsul
  */
 public class Main extends Application {
-    
-    
-     @Override
+
+    @Override
     public void start(Stage stage) throws Exception {
-         Parent root = FXMLLoader.load(getClass().getResource("LogInScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LogInScreen.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Welcome To IClinic Booking");
+        stage.setTitle("ICare Applications 1.0");
         stage.setScene(scene);
         stage.show();
-        
+
     }
-    
-    
+
     public static void main(String[] args) {
         launch(args);
     }
 
-   
 }

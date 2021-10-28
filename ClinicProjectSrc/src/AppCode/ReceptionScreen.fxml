@@ -11,7 +11,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#signOutButton" text="Sign Out" />
+              <MenuItem mnemonicParsing="false" onAction="#logOut" text="Sign Out..." />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Doctors">
@@ -22,13 +22,13 @@
             </Menu>
           <Menu mnemonicParsing="false" text="Patiants">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#goToAddPatiantButton" text="Add Patiant" />
-                  <MenuItem mnemonicParsing="false" onAction="#goToEditPatiantButtcon" text="Edit Patiant" />
+                  <MenuItem mnemonicParsing="false" onAction="#addPatiantButton" text="Add Patiant" />
+                  <MenuItem mnemonicParsing="false" onAction="#editPatiantButtcon" text="Edit Patiant" />
                </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Appoitments">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#goToMakeAppoitmentsButton" text="Make Appoitment" />
+                  <MenuItem mnemonicParsing="false" onAction="#makeAppoitmentsButton" text="Make Appoitment" />
                 <MenuItem mnemonicParsing="false" onAction="#printAppoitmentsButton" text="Print Appoitment" />
               </items>
             </Menu>

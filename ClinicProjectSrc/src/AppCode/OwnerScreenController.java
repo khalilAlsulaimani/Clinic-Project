@@ -30,9 +30,6 @@ public class OwnerScreenController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void signOutButton(ActionEvent event) {
-    }
 
     @FXML
     private void goToAddEmployee(ActionEvent event) {
@@ -44,6 +41,10 @@ public class OwnerScreenController implements Initializable {
 
     @FXML
     private void goToDeleteEmployee(ActionEvent event) {
+    }
+
+    @FXML
+    private void logOut(ActionEvent event) {
     }
     
 }

@@ -30,5 +30,9 @@ public class ManngerScreenController implements Initializable {
         // TODO
     }    
 
+    @FXML
+    private void logOut(ActionEvent event) {
+    }
+
     
 }
