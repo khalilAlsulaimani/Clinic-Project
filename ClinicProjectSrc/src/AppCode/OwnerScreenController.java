@@ -52,15 +52,40 @@ public class OwnerScreenController implements Initializable {
     }
 
     @FXML
-    private void editOwner(ActionEvent event) {
+    private void editOwner(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditOwner.fxml"));
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    private void editDoctor(ActionEvent event) {
+    private void editDoctor(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDoctor.fxml"));
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    private void editEmployee(ActionEvent event) {
+    private void editEmployee(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditEmployye.fxml"));
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
