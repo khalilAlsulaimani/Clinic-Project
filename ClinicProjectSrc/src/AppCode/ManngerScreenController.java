@@ -21,6 +21,12 @@ public class ManngerScreenController implements Initializable {
 
     @FXML
     private Label welcomeLabel;
+    @FXML
+    private Label numOfDocs;
+    @FXML
+    private Label numOfPatiants;
+    @FXML
+    private Label numOfReceps;
 
     /**
      * Initializes the controller class.
@@ -32,6 +38,18 @@ public class ManngerScreenController implements Initializable {
 
     @FXML
     private void logOut(ActionEvent event) {
+    }
+
+    @FXML
+    private void editMangs(ActionEvent event) {
+    }
+
+    @FXML
+    private void editDocs(ActionEvent event) {
+    }
+
+    @FXML
+    private void editReps(ActionEvent event) {
     }
 
     
