@@ -7,7 +7,10 @@ package AppCode;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,10 +39,27 @@ public class OwnerScreenController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @throws java.sql.SQLException
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            DatabaseConnection connection = new DatabaseConnection();
+
+            welcomeLabel.setText(connection.getName("OWNER", 1));
+
+            numOfPatiance.setText(String.valueOf(connection.getNumOfColumns("PAITIANT")));
+
+            numOfDoctors.setText(String.valueOf(connection.getNumOfColumns("DOCTOR")));
+
+            numOfEmployees.setText(String.valueOf(connection.getNumOfColumns("DOCTOR")));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OwnerScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @FXML
@@ -53,6 +73,7 @@ public class OwnerScreenController implements Initializable {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("ICare Applications 1.0");
         stage.show();
 
     }
@@ -66,6 +87,7 @@ public class OwnerScreenController implements Initializable {
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+        stage.setTitle("Edit Owners Window");
         stage.setScene(scene);
         stage.show();
     }
@@ -78,6 +100,7 @@ public class OwnerScreenController implements Initializable {
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+        stage.setTitle("Edit Doctors Window");
         stage.setScene(scene);
         stage.show();
     }
@@ -90,6 +113,7 @@ public class OwnerScreenController implements Initializable {
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+        stage.setTitle("Edit Employee Window");
         stage.setScene(scene);
         stage.show();
     }
