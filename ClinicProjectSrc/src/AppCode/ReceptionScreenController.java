@@ -15,7 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,6 +27,15 @@ import javafx.stage.Stage;
  * @author alsul
  */
 public class ReceptionScreenController implements Initializable {
+
+    @FXML
+    private TextField name;
+    @FXML
+    private TextField age;
+    @FXML
+    private TextField id;
+    @FXML
+    private ComboBox<?> doctorsComboBox;
 
     /**
      * Initializes the controller class.
@@ -49,13 +60,6 @@ public class ReceptionScreenController implements Initializable {
 
     
 
-    @FXML
-    private void addPatiantButton(ActionEvent event) {
-    }
-
-    @FXML
-    private void editPatiantButtcon(ActionEvent event) {
-    }
 
     @FXML
     private void makeAppoitmentsButton(ActionEvent event) {
@@ -75,6 +79,18 @@ public class ReceptionScreenController implements Initializable {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void addPatiant(ActionEvent event) {
+    }
+
+    @FXML
+    private void editPatiant(ActionEvent event) {
+    }
+
+    @FXML
+    private void deletePaitiant(ActionEvent event) {
     }
 
 }

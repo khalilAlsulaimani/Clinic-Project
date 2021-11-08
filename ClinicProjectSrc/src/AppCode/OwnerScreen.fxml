@@ -46,9 +46,9 @@
             <Label prefHeight="18.0" prefWidth="170.0" text="Number Of Paitince :" />
             <Label text="Numbre Of Doctors:" GridPane.rowIndex="1" />
             <Label prefHeight="18.0" prefWidth="142.0" text="Number Of Employees :" GridPane.rowIndex="2" />
-            <Label prefHeight="18.0" prefWidth="82.0" GridPane.columnIndex="1" />
-            <Label prefHeight="18.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="18.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="numOfPatiance" prefHeight="18.0" prefWidth="82.0" GridPane.columnIndex="1" />
+            <Label fx:id="numOfDoctors" prefHeight="18.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="numOfEmployees" prefHeight="18.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button layoutX="597.0" layoutY="439.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />

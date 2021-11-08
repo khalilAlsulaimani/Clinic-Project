@@ -27,6 +27,12 @@ public class OwnerScreenController implements Initializable {
 
     @FXML
     private Label welcomeLabel;
+    @FXML
+    private Label numOfPatiance;
+    @FXML
+    private Label numOfDoctors;
+    @FXML
+    private Label numOfEmployees;
 
     /**
      * Initializes the controller class.
