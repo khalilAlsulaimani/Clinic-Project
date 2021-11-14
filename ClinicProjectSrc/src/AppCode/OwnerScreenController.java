@@ -45,21 +45,7 @@ public class OwnerScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            DatabaseConnection connection = new DatabaseConnection();
-
-            welcomeLabel.setText(connection.getName("OWNER", 1));
-
-            numOfPatiance.setText(String.valueOf(connection.getNumOfColumns("PAITIANT")));
-
-            numOfDoctors.setText(String.valueOf(connection.getNumOfColumns("DOCTOR")));
-
-            numOfEmployees.setText(String.valueOf(connection.getNumOfColumns("DOCTOR")));
-
-        } catch (SQLException ex) {
-            Logger.getLogger(OwnerScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+       
     }
 
     @FXML

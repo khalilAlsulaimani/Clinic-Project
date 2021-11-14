@@ -36,25 +36,31 @@ public class LogInScreenController implements Initializable {
     private Label errorLabel;
     @FXML
     private TextField usernameInput;
+    
+    private OwnerQuries owner = new OwnerQuries();
 
-//    private boolean isValidLogin(String username,String password){
-//        
-//        
-//        
-//    }
+    private void failedLogin(){
+        errorLabel.setText("Invalid Email Or Password Please Trye again ");
+    }
     private void login(String username, String password, ActionEvent event) throws IOException {
         if (username.startsWith("OWN")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
-            ((Node) event.getSource()).getScene().getWindow().hide();
+            if(owner.login(usernameInput.getText(), passwordInput.getText())){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
+                ((Node) event.getSource()).getScene().getWindow().hide();
 
-            Parent root = loader.load();
-            OwnerScreenController ownerScreen = loader.getController();
+                Parent root = loader.load();
+                OwnerScreenController ownerScreen = loader.getController();
 
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("ICare Applications 1.0");
-            stage.show();
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("ICare Applications 1.0");
+                stage.show();
+                
+            }else{
+                failedLogin();
+            }
+            
 
         } else if (username.startsWith("MAN")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ManngerScreen.fxml"));
