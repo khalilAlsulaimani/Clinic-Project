@@ -36,7 +36,7 @@ public class OwnerQuries {
     public OwnerQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
-            getOwner = connection.prepareStatement("SELECT id FROM  clinicdb.owner WHERE username = ?");
+            getOwner = connection.prepareStatement("SELECT * FROM  clinicdb.owner WHERE username = ?");
             editUsername = connection.prepareStatement("UPDATE  clinicdb.owner SET username =? where id = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.owner SET password =? where id = ?  ");
 

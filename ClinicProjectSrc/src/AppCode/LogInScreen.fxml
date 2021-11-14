@@ -14,7 +14,7 @@
             <Font size="33.0" />
          </font>
       </Label>
-      <TextField fx:id="passwordInput" layoutX="226.0" layoutY="244.0" promptText="enter password" />
+      <TextField fx:id="passwordInput" layoutX="226.0" layoutY="244.0" onAction="#signInButton" promptText="enter password" />
       <Label layoutX="132.0" layoutY="178.0" text="Username :" />
       <Label layoutX="134.0" layoutY="248.0" text="Password :" />
       <Label fx:id="errorLabel" layoutX="141.0" layoutY="102.0" prefHeight="27.0" prefWidth="321.0" textAlignment="CENTER" textFill="RED" underline="true">
