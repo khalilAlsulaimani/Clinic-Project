@@ -7,9 +7,18 @@ package AppCode;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,15 +45,37 @@ public class LogInScreenController implements Initializable {
     private Label errorLabel;
     @FXML
     private TextField usernameInput;
-    
+
     private OwnerQuries owner = new OwnerQuries();
 
-    private void failedLogin(){
+    private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
+    private LocalDateTime now = LocalDateTime.now();
+
+    private void failedLogin() {
         errorLabel.setText("Invalid Email Or Password Please Trye again ");
     }
+
+    private void loginLog(String who) {
+
+        try {
+            File file = new File("D:\\1-Desktop\\uni\\Year 3\\Advanced Programming Practical\\Clinic Project\\logs\\" + date.format(now) + ".txt");
+
+            FileWriter fileWrite = new FileWriter(file, true);
+            BufferedWriter writer = new BufferedWriter(fileWrite);
+            writer.write(who + " logged in at " + time.format(now));
+            writer.close();
+
+        } catch (IOException ex) {
+            System.out.println("error");
+        }
+
+    }
+
     private void login(String username, String password, ActionEvent event) throws IOException {
-        if (username.startsWith("OWN")) {
-            if(owner.login(usernameInput.getText(), passwordInput.getText())){
+        if (username.startsWith("OWN") || username.startsWith("own")) {
+            if (owner.login(usernameInput.getText(), passwordInput.getText())) {
+                loginLog(username);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
                 ((Node) event.getSource()).getScene().getWindow().hide();
 
@@ -56,13 +87,12 @@ public class LogInScreenController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("ICare Applications 1.0");
                 stage.show();
-                
-            }else{
+
+            } else {
                 failedLogin();
             }
-            
 
-        } else if (username.startsWith("MAN")) {
+        } else if (username.startsWith("MAN") || username.startsWith("man")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ManngerScreen.fxml"));
             ((Node) event.getSource()).getScene().getWindow().hide();
 
@@ -75,7 +105,7 @@ public class LogInScreenController implements Initializable {
 
             stage.setScene(scene);
             stage.show();
-        } else if (username.startsWith("REP")) {
+        } else if (username.startsWith("REP") || username.startsWith("rep") ) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
             ((Node) event.getTarget()).getScene().getWindow().hide();
 
