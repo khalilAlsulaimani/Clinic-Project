@@ -63,7 +63,7 @@ public class LogInScreenController implements Initializable {
 
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter writer = new BufferedWriter(fileWrite);
-            writer.write(who + " logged in at " + time.format(now));
+            writer.write(who+": " + " Logged In At " + time.format(now)+"\n---------------------------------\n");
             writer.close();
 
         } catch (IOException ex) {
