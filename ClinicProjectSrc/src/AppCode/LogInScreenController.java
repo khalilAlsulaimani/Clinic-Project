@@ -47,10 +47,27 @@ public class LogInScreenController implements Initializable {
     private TextField usernameInput;
 
     private OwnerQuries owner = new OwnerQuries();
+    
+    private ManngerQuries mannger = new ManngerQuries();
+    
+    private ReceptionQuries receptionest = new ReceptionQuries();
 
     private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
     private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
     private LocalDateTime now = LocalDateTime.now();
+
+    private void changeScreen(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
+        ((Node) event.getSource()).getScene().getWindow().hide();
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("ICare Applications 1.0");
+        stage.show();
+    }
 
     private void failedLogin() {
         errorLabel.setText("Invalid Email Or Password Please Trye again ");
@@ -63,7 +80,7 @@ public class LogInScreenController implements Initializable {
 
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter writer = new BufferedWriter(fileWrite);
-            writer.write(who+": " + " Logged In At " + time.format(now)+"\n---------------------------------\n");
+            writer.write(who + ": " + " Logged In At " + time.format(now) + "\n---------------------------------\n");
             writer.close();
 
         } catch (IOException ex) {
@@ -76,48 +93,28 @@ public class LogInScreenController implements Initializable {
         if (username.startsWith("OWN") || username.startsWith("own")) {
             if (owner.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
-                ((Node) event.getSource()).getScene().getWindow().hide();
-
-                Parent root = loader.load();
-                OwnerScreenController ownerScreen = loader.getController();
-
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("ICare Applications 1.0");
-                stage.show();
+                changeScreen(event);
 
             } else {
                 failedLogin();
             }
 
-        } else if (username.startsWith("MAN") || username.startsWith("man")){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ManngerScreen.fxml"));
-            ((Node) event.getSource()).getScene().getWindow().hide();
+        } else if (username.startsWith("MAN") || username.startsWith("man")) {
+            if (mannger.login(usernameInput.getText(), passwordInput.getText())) {
+                loginLog(username);
+                changeScreen(event);
 
-            Parent root = loader.load();
-            ManngerScreenController manngerScreen = loader.getController();
+            } else {
+                failedLogin();
+            }
+        } else if (username.startsWith("REP") || username.startsWith("rep")) {
+            if (receptionest.login(usernameInput.getText(), passwordInput.getText())) {
+                loginLog(username);
+                changeScreen(event);
 
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setTitle("ICare Applications 1.0");
-
-            stage.setScene(scene);
-            stage.show();
-        } else if (username.startsWith("REP") || username.startsWith("rep") ) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
-            ((Node) event.getTarget()).getScene().getWindow().hide();
-
-            Parent root = loader.load();
-            ReceptionScreenController receptionScreen = loader.getController();
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setTitle("ICare Applications 1.0");
-
-            stage.setScene(scene);
-            stage.show();
+            } else {
+                failedLogin();
+            }
         } else {
             errorLabel.setText("invalid username!");
         }
