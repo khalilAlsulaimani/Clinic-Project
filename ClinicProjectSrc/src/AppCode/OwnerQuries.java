@@ -27,10 +27,7 @@ public class OwnerQuries {
     private Connection connection;
 
     private PreparedStatement getOwner;
-    private PreparedStatement getName;
-    private PreparedStatement getUsername;
     private PreparedStatement editUsername;
-    private PreparedStatement getPassword;
     private PreparedStatement editPassword;
 
     public OwnerQuries() {
