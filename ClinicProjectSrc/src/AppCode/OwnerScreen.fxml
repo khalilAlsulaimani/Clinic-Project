@@ -51,6 +51,6 @@
             <Label fx:id="numOfEmployees" prefHeight="18.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button layoutX="597.0" layoutY="439.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+      <Button layoutX="91.0" layoutY="473.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
    </children>
 </AnchorPane>

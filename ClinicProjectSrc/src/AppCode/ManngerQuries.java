@@ -46,7 +46,8 @@ public class ManngerQuries {
             ResultSet resultSet = getMannger.executeQuery();
 
             if (resultSet.next()) {
-                Owner result = new Owner(resultSet.getInt("id"), resultSet.getString("fullName"), username, resultSet.getString("password"));
+                Mannger result = new Mannger(resultSet.getInt("id"), resultSet.getString("fullName"), username, resultSet.getString("password")
+                                             ,resultSet.getInt("receptionistID"));
                 if (password.equals(result.getPassword())) {
                     return true;
                 }

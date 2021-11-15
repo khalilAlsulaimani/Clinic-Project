@@ -47,17 +47,26 @@ public class LogInScreenController implements Initializable {
     private TextField usernameInput;
 
     private OwnerQuries owner = new OwnerQuries();
-    
+
     private ManngerQuries mannger = new ManngerQuries();
-    
+
     private ReceptionQuries receptionest = new ReceptionQuries();
 
     private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
     private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
     private LocalDateTime now = LocalDateTime.now();
 
-    private void changeScreen(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
+    private void changeScreen(ActionEvent event, String who) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
+        if (who.equals("own")) {
+            loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
+
+        } else if (who.equals("man")) {
+            loader = new FXMLLoader(getClass().getResource("ManngerScreen.fxml"));
+        } else {
+            loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
+        }
+
         ((Node) event.getSource()).getScene().getWindow().hide();
 
         Parent root = loader.load();
@@ -93,7 +102,7 @@ public class LogInScreenController implements Initializable {
         if (username.startsWith("OWN") || username.startsWith("own")) {
             if (owner.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
-                changeScreen(event);
+                changeScreen(event, "own");
 
             } else {
                 failedLogin();
@@ -102,7 +111,7 @@ public class LogInScreenController implements Initializable {
         } else if (username.startsWith("MAN") || username.startsWith("man")) {
             if (mannger.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
-                changeScreen(event);
+                changeScreen(event, "man");
 
             } else {
                 failedLogin();
@@ -110,7 +119,7 @@ public class LogInScreenController implements Initializable {
         } else if (username.startsWith("REP") || username.startsWith("rep")) {
             if (receptionest.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
-                changeScreen(event);
+                changeScreen(event, "rep");
 
             } else {
                 failedLogin();
