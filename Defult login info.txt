@@ -1,12 +1,12 @@
 owner:
-username :OWN1000
-password :own1000
+username :OWN100
+password :a12345
 
 mannger: 
-username:MAN1000
-password:man1000
+username:MAN100
+password:a12345
 
 receptionist:
-username:REP1000
-password:rep1000
+username:REP100
+password:a12345
 
