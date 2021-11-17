@@ -9,14 +9,14 @@ package AppCode;
  *
  * @author alsul
  */
-public class Reception {
+public class Repceptionest {
     private int id;
     private String fullName;
     private String username;
     private String password;
     private int manID;
 
-    public Reception(int id, String fullName, String username, String Password, int manID) {
+    public Repceptionest(int id, String fullName, String username, String Password, int manID) {
         setId(id);
         setFullName(fullName);
         setUsername(username);
