@@ -8,16 +8,16 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppCode.LogInScreenController">
    <children>
-      <TextField fx:id="usernameInput" layoutX="226.0" layoutY="174.0" promptText="enter username" />
+      <TextField fx:id="usernameInput" layoutX="226.0" layoutY="174.0" onAction="#signInButton" promptText="Enter Username" />
       <Label layoutX="247.0" layoutY="30.0" text="Sign In ">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
-      <TextField fx:id="passwordInput" layoutX="226.0" layoutY="244.0" onAction="#signInButton" promptText="enter password" />
+      <TextField fx:id="passwordInput" layoutX="226.0" layoutY="244.0" onAction="#signInButton" promptText="Enter Password" />
       <Label layoutX="132.0" layoutY="178.0" text="Username :" />
       <Label layoutX="134.0" layoutY="248.0" text="Password :" />
-      <Label fx:id="errorLabel" layoutX="141.0" layoutY="102.0" prefHeight="27.0" prefWidth="321.0" textAlignment="CENTER" textFill="RED" underline="true">
+      <Label fx:id="errorLabel" layoutX="69.0" layoutY="109.0" prefHeight="27.0" prefWidth="461.0" textAlignment="JUSTIFY" textFill="RED" underline="true">
          <font>
             <Font size="15.0" />
          </font></Label>

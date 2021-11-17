@@ -39,6 +39,7 @@ public class OwnerScreenController implements Initializable {
     
     private ReceptionQuries repceptionest = new ReceptionQuries();
     private ManngerQuries mannger = new ManngerQuries();
+    private DoctorQuries doctor = new DoctorQuries();
 
     /**
      * Initializes the controller class.
@@ -49,6 +50,7 @@ public class OwnerScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         numOfEmployees.setText(String.valueOf(repceptionest.NumOfReps()+mannger.numOfManngers()));
+        numOfDoctors.setText(String.valueOf(doctor.NumOfDoctors()));
        
     }
 

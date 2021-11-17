@@ -37,7 +37,7 @@ public class ManngerQuries {
             editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where id = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.mangger SET password =? where id = ?  ");
             addReceptionest = connection.prepareStatement("UPDATE clinicdb.mangger SET receptionistID =? WHERE id =?");
-            getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  receptionist");
+            getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  mannger");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -51,7 +51,7 @@ public class ManngerQuries {
 
             if (resultSet.next()) {
                 Mannger result = new Mannger(resultSet.getInt("id"), resultSet.getString("fullName"), username, resultSet.getString("password"),
-                         resultSet.getInt("receptionistID"));
+                        resultSet.getInt("receptionistID"));
                 if (password.equals(result.getPassword())) {
                     return true;
                 }
@@ -65,14 +65,15 @@ public class ManngerQuries {
 
     }
 
-    public Owner getMannger(String username) {
+    public Mannger getMannger(String username) {
 
         try {
             getMannger.setString(1, username);
             ResultSet resultSet = getMannger.executeQuery();
 
             if (resultSet.next()) {
-                Owner result = new Owner(resultSet.getInt("id"), resultSet.getString("fullname"), username, resultSet.getString("password"));
+                Mannger result = new Mannger(resultSet.getInt("id"), resultSet.getString("fullname"), username, resultSet.getString("password"),
+                        resultSet.getInt("receptionistID"));
                 return result;
             }
 
@@ -117,20 +118,19 @@ public class ManngerQuries {
         return 0;
 
     }
-    
-    public int numOfManngers(){
-        int numOfReps=0;
-        
-        try{
+
+    public int numOfManngers() {
+        int numOfReps = 0;
+
+        try {
             ResultSet result = getAllManggers.executeQuery();
             result.next();
             numOfReps = result.getInt("numOfRows");
         } catch (SQLException ex) {
             Logger.getLogger(ReceptionQuries.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return numOfReps;
     }
-
 
 }
