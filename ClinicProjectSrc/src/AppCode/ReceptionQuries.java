@@ -69,14 +69,15 @@ public class ReceptionQuries {
 
     }
 
-    public Owner getReceptionist(String username) {
+    public Repceptionest getReceptionist(String username) {
 
         try {
             getReceptionist.setString(1, username);
             ResultSet resultSet = getReceptionist.executeQuery();
 
             if (resultSet.next()) {
-                Owner result = new Owner(resultSet.getInt("id"), resultSet.getString("fullname"), username, resultSet.getString("password"));
+                Repceptionest result = new Repceptionest(resultSet.getInt("id"), resultSet.getString("fullname"), username,
+                        resultSet.getString("password"),resultSet.getInt("manngerID"));
                 return result;
             }
 

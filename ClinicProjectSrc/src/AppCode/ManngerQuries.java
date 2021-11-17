@@ -91,6 +91,7 @@ public class ManngerQuries {
             if (resultSet.next() && login(username, password)) {
                 editPassword.setString(1, password);
                 editPassword.setInt(2, id);
+                editPassword.executeUpdate();
             }
 
         } catch (SQLException ex) {
@@ -101,14 +102,15 @@ public class ManngerQuries {
 
     }
 
-    public int editUsername(int id, String username, String password) {
+    public int editUsername(String username) {
         try {
             getMannger.setString(1, username);
             ResultSet resultSet = getMannger.executeQuery();
 
             if (resultSet.next()) {
-                editPassword.setString(1, password);
-                editPassword.setInt(2, id);
+                editUsername.setString(1, username);
+                editUsername.setInt(2, resultSet.getInt("id"));
+                editUsername.executeUpdate();
             }
 
         } catch (SQLException ex) {
