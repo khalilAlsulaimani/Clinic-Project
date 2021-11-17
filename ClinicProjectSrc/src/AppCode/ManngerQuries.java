@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +28,7 @@ public class ManngerQuries {
     private PreparedStatement editUsername;
     private PreparedStatement editPassword;
     private PreparedStatement addReceptionest;
+    private PreparedStatement getAllManggers;
 
     public ManngerQuries() {
         try {
@@ -34,6 +37,7 @@ public class ManngerQuries {
             editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where id = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.mangger SET password =? where id = ?  ");
             addReceptionest = connection.prepareStatement("UPDATE clinicdb.mangger SET receptionistID =? WHERE id =?");
+            getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  receptionist");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -46,8 +50,8 @@ public class ManngerQuries {
             ResultSet resultSet = getMannger.executeQuery();
 
             if (resultSet.next()) {
-                Mannger result = new Mannger(resultSet.getInt("id"), resultSet.getString("fullName"), username, resultSet.getString("password")
-                                             ,resultSet.getInt("receptionistID"));
+                Mannger result = new Mannger(resultSet.getInt("id"), resultSet.getString("fullName"), username, resultSet.getString("password"),
+                         resultSet.getInt("receptionistID"));
                 if (password.equals(result.getPassword())) {
                     return true;
                 }
@@ -113,5 +117,20 @@ public class ManngerQuries {
         return 0;
 
     }
+    
+    public int numOfManngers(){
+        int numOfReps=0;
+        
+        try{
+            ResultSet result = getAllManggers.executeQuery();
+            result.next();
+            numOfReps = result.getInt("numOfRows");
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceptionQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return numOfReps;
+    }
+
 
 }

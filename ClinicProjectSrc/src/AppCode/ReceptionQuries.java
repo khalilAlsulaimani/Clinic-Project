@@ -5,11 +5,15 @@
  */
 package AppCode;
 
+import java.sql.ResultSetMetaData;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,15 +29,20 @@ public class ReceptionQuries {
     private PreparedStatement getReceptionist;
     private PreparedStatement editUsername;
     private PreparedStatement editPassword;
+    private PreparedStatement addMannger;
     private PreparedStatement addReceptionest;
+    private PreparedStatement getAllReps; 
 
     public ReceptionQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
+            
             getReceptionist = connection.prepareStatement("SELECT * FROM  clinicdb.receptionist WHERE username = ?");
             editUsername = connection.prepareStatement("UPDATE  clinicdb.receptionist SET username =? where id = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.receptionist SET password =? where id = ?  ");
-            addReceptionest = connection.prepareStatement("UPDATE clinicdb.receptionist SET manngerID =? WHERE id =?");
+            addMannger = connection.prepareStatement("UPDATE clinicdb.receptionist SET manngerID =? WHERE id =?");
+            addReceptionest = connection.prepareStatement("INSERT INTO clinicdb.receptionist VALUES(?,?,?,?,?)");
+            getAllReps = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  receptionist");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -111,6 +120,20 @@ public class ReceptionQuries {
 
         return 0;
 
+    }
+    
+    public int NumOfReps(){
+        int numOfReps=0;
+        
+        try{
+            ResultSet result = getAllReps.executeQuery();
+            result.next();
+            numOfReps = result.getInt("numOfRows");
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceptionQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return numOfReps;
     }
 
 }
