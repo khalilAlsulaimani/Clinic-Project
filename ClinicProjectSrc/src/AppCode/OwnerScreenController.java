@@ -36,22 +36,32 @@ public class OwnerScreenController implements Initializable {
     private Label numOfDoctors;
     @FXML
     private Label numOfEmployees;
-    
+
+
+    private OwnerQuries owner = new OwnerQuries();
     private ReceptionQuries repceptionest = new ReceptionQuries();
     private ManngerQuries mannger = new ManngerQuries();
     private DoctorQuries doctor = new DoctorQuries();
+    private PatiantQuries patiant = new PatiantQuries();
+
+    public void getOwnerUsername(String usrname) {
+        welcomeLabel.setText("Welcome Back "+owner.getOwnerName(usrname));
+
+    }
 
     /**
      * Initializes the controller class.
      *
      * @param url
+     * @param rb
      * @throws java.sql.SQLException
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        numOfEmployees.setText(String.valueOf(repceptionest.NumOfReps()+mannger.numOfManngers()));
+        numOfEmployees.setText(String.valueOf(repceptionest.NumOfReps() + mannger.numOfManngers()));
         numOfDoctors.setText(String.valueOf(doctor.NumOfDoctors()));
-       
+        numOfPatiance.setText(String.valueOf(patiant.numOfPatiants()));
+
     }
 
     @FXML

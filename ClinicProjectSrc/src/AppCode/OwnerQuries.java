@@ -29,6 +29,7 @@ public class OwnerQuries {
     private PreparedStatement getOwner;
     private PreparedStatement editUsername;
     private PreparedStatement editPassword;
+    private PreparedStatement getOwnerName;
 
     public OwnerQuries() {
         try {
@@ -36,6 +37,7 @@ public class OwnerQuries {
             getOwner = connection.prepareStatement("SELECT * FROM  clinicdb.owner WHERE username = ?");
             editUsername = connection.prepareStatement("UPDATE  clinicdb.owner SET username =? where id = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.owner SET password =? where id = ?  ");
+            getOwnerName = connection.prepareStatement("SELECT fullName FROM clinicdb.owner WHERE username = ?");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -97,14 +99,14 @@ public class OwnerQuries {
 
     }
 
-    public int editUsername(int id, String username, String password) {
+    public int editUsername(String username) {
         try {
             getOwner.setString(1, username);
             ResultSet resultSet = getOwner.executeQuery();
 
             if (resultSet.next()) {
-                editPassword.setString(1, password);
-                editPassword.setInt(2, id);
+                editUsername.setString(1, username);
+                editUsername.setInt(2, resultSet.getInt("id"));
             }
 
         } catch (SQLException ex) {
@@ -113,6 +115,23 @@ public class OwnerQuries {
 
         return 0;
 
+    }
+
+    public String getOwnerName(String username) {
+
+        try {
+            getOwnerName.setString(1, username);
+            ResultSet result = getOwnerName.executeQuery();
+            if (result.next()){
+                return result.getString("fullName");
+            }
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OwnerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 
 }

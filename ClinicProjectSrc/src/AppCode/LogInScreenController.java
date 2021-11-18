@@ -5,21 +5,14 @@
  */
 package AppCode;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +21,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -58,18 +50,22 @@ public class LogInScreenController implements Initializable {
 
     private void changeScreen(ActionEvent event, String who) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
+        Parent root;
         if (who.equals("own")) {
             loader = new FXMLLoader(getClass().getResource("OwnerScreen.fxml"));
+            root = loader.load();
+            OwnerScreenController ownerController = loader.getController();
+            ownerController.getOwnerUsername(usernameInput.getText());
 
         } else if (who.equals("man")) {
             loader = new FXMLLoader(getClass().getResource("ManngerScreen.fxml"));
+            root = loader.load();
         } else {
             loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
+            root = loader.load();
         }
 
         ((Node) event.getSource()).getScene().getWindow().hide();
-
-        Parent root = loader.load();
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);

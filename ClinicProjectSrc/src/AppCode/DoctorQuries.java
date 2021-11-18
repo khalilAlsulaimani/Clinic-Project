@@ -65,17 +65,17 @@ public class DoctorQuries {
     
 
     public int NumOfDoctors() {
-        int numOfReps = 0;
+        int numOfDocs = 0;
 
         try {
             ResultSet result = getAllDoctors.executeQuery();
             result.next();
-            numOfReps = result.getInt("numOfRows");
+            numOfDocs = result.getInt("numOfRows");
         } catch (SQLException ex) {
             Logger.getLogger(ReceptionQuries.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return numOfReps;
+        return numOfDocs;
     }
 
 }
