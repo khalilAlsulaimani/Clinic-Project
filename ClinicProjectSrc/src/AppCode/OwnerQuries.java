@@ -30,6 +30,7 @@ public class OwnerQuries {
     private PreparedStatement editUsername;
     private PreparedStatement editPassword;
     private PreparedStatement getOwnerName;
+    private PreparedStatement editName;
 
     public OwnerQuries() {
         try {
@@ -38,6 +39,7 @@ public class OwnerQuries {
             editUsername = connection.prepareStatement("UPDATE  clinicdb.owner SET username =? where id = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.owner SET password =? where id = ?  ");
             getOwnerName = connection.prepareStatement("SELECT fullName FROM clinicdb.owner WHERE username = ?");
+            editName = connection.prepareStatement("UPDATE clinicdb.owner SET fullName = ? WHERE username = ? ");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -117,20 +119,32 @@ public class OwnerQuries {
 
     }
 
+    public int editName(String username, String name) {
+
+        try {
+            editName.setString(1, name);
+            editName.setString(2, username);
+            editName.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(OwnerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
     public String getOwnerName(String username) {
 
         try {
             getOwnerName.setString(1, username);
             ResultSet result = getOwnerName.executeQuery();
-            if (result.next()){
+            if (result.next()) {
                 return result.getString("fullName");
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(OwnerQuries.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
 
