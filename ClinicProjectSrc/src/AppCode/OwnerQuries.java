@@ -87,6 +87,8 @@ public class OwnerQuries {
         try {
             editPassword.setString(1, password);
             editPassword.setString(2, username);
+            editPassword.executeUpdate();
+            return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -7,9 +7,11 @@ package AppCode;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -20,17 +22,15 @@ import javafx.scene.control.TextField;
 public class EditDoctorController implements Initializable {
 
     @FXML
-    private TextField fullName;
+    private TextField docID;
     @FXML
-    private TextField ID;
+    private TextField docName;
     @FXML
-    private TextField field;
+    private TextField docField;
     @FXML
-    private Button addDoc;
+    private Label addOutPutMessage;
     @FXML
-    private Button editDoc;
-    @FXML
-    private Button deleteDoc;
+    private Label deleteOutputMessage;
 
     /**
      * Initializes the controller class.
@@ -39,5 +39,13 @@ public class EditDoctorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clear(ActionEvent event) {
+    }
+
+    @FXML
+    private void addDoctor(ActionEvent event) {
+    }
     
 }

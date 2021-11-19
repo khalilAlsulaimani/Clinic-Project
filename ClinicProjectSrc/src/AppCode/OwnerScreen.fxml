@@ -21,7 +21,7 @@
                </items></Menu>
             <Menu mnemonicParsing="false" text="Doctors">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#editDoctor" text="Edit Doctor" />
+                  <MenuItem mnemonicParsing="false" onAction="#editDoctor" text="Edit Doctors" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Employees">
