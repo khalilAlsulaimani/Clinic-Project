@@ -29,12 +29,12 @@
                      <children>
                         <Label text="Enter Username :" />
                         <Label text="Enter New Full Name :" GridPane.rowIndex="1" />
-                        <TextField fx:id="usernameField" GridPane.columnIndex="1" />
-                        <TextField fx:id="newName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="usernameFieldOnNamePage" GridPane.columnIndex="1" />
+                        <TextField fx:id="newName" onAction="#changeName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Button layoutX="398.0" layoutY="299.0" mnemonicParsing="false" onAction="#changeName" text="Apply Change" />
-                  <Label fx:id="nameOutputMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="44.0" prefHeight="19.0" prefWidth="600.0" textFill="#f70303">
+                  <Label fx:id="nameOutPutMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="44.0" prefHeight="19.0" prefWidth="600.0" textFill="#f70303">
                      <font>
                         <Font name="Constantia" size="15.0" />
                      </font></Label>
@@ -55,14 +55,18 @@
                         <RowConstraints maxHeight="115.4" minHeight="10.0" prefHeight="101.00000610351563" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Enter Username :" />
+                        <Label text="Enter Old Username :" />
                         <Label text="Enter New Username :" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="usernameFieldOnUsernamePage" GridPane.columnIndex="1" />
+                        <TextField fx:id="newUsername" onAction="#changeUsername" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Button layoutX="398.0" layoutY="299.0" mnemonicParsing="false" text="Apply Change" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="44.0" prefHeight="18.0" prefWidth="326.0" text="Label" />
+                  <Button layoutX="398.0" layoutY="299.0" mnemonicParsing="false" onAction="#changeUsername" text="Apply Change" />
+                  <Label fx:id="usernameOutPutMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="48.0" prefHeight="19.0" prefWidth="600.0" textFill="#f70303">
+                     <font>
+                        <Font name="Constantia" size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>
@@ -83,12 +87,16 @@
                      <children>
                         <Label text="Enter Username :" />
                         <Label text="Enter New Password :" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="usernameFieldOnPasswordPage" GridPane.columnIndex="1" />
+                        <TextField fx:id="newPassword" onAction="#changePassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Button layoutX="398.0" layoutY="299.0" mnemonicParsing="false" text="Apply Change" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="44.0" prefHeight="18.0" prefWidth="326.0" text="Label" />
+                  <Button layoutX="398.0" layoutY="299.0" mnemonicParsing="false" onAction="#changePassword" text="Apply Change" />
+                  <Label fx:id="passwordOutPutMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="50.0" prefHeight="19.0" prefWidth="600.0" textFill="#f70303">
+                     <font>
+                        <Font name="Constantia" size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>

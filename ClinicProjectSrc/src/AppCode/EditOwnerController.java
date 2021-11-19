@@ -21,13 +21,26 @@ import javafx.scene.control.TextField;
 public class EditOwnerController implements Initializable {
 
     @FXML
-    private TextField usernameField;
-    @FXML
     private TextField newName;
 
     private OwnerQuries owner = new OwnerQuries();
     @FXML
-    private Label nameOutputMessage;
+    private TextField newUsername;
+    @FXML
+    private TextField newPassword;
+
+    @FXML
+    private Label nameOutPutMessage;
+    @FXML
+    private Label usernameOutPutMessage;
+    @FXML
+    private Label passwordOutPutMessage;
+    @FXML
+    private TextField usernameFieldOnNamePage;
+    @FXML
+    private TextField usernameFieldOnUsernamePage;
+    @FXML
+    private TextField usernameFieldOnPasswordPage;
 
     /**
      * Initializes the controller class.
@@ -37,29 +50,82 @@ public class EditOwnerController implements Initializable {
         // TODO
     }
 
+    private void clear(TextField text1, TextField text2) {
+        text1.clear();
+        text2.clear();
+
+    }
+
     @FXML
     private void changeName(ActionEvent event) {
-        if (usernameField.getText().isBlank() || newName.getText().isBlank()) {
-            nameOutputMessage.setText("Empty Username Or Name Given Please Enter Correct Values ");
-        } else if (owner.getOwner(usernameField.getText()) == null) {
-            nameOutputMessage.setText("Invalid Username ");
-        } else if (newName.getText().length() < 5 || newName.getText().matches(".*\\.*")) {
-            nameOutputMessage.setText("Invalid Name");
+        if (usernameFieldOnNamePage.getText().isBlank() || newName.getText().isBlank()) {
+            nameOutPutMessage.setText("Empty Username Or Name Given Please Enter Correct Values ");
+        } else if (owner.getOwner(usernameFieldOnNamePage.getText()) == null) {
+            nameOutPutMessage.setText("Invalid Username ");
+        } else if (newName.getText().length() < 5 || newName.getText().matches(".*\\d.*")) {
+            nameOutPutMessage.setText("Invalid Name");
         } else {
 
-            int change = owner.editName(usernameField.getText(), newName.getText());
+            int change = owner.editName(usernameFieldOnNamePage.getText(), newName.getText());
 
             if (change == 1) {
-                nameOutputMessage.setText("Changes Have Been Applied");
-                usernameField.clear();
-                newName.clear();
+                nameOutPutMessage.setText("Name Has Been Changed");
+                clear(usernameFieldOnNamePage,newName);
 
             } else {
-                nameOutputMessage.setText("Changes Have Not Been Made");
+                nameOutPutMessage.setText("Name Has Not Been Changed Error Occured");
             }
 
         }
 
+    }
+
+    @FXML
+    private void changeUsername(ActionEvent event) {
+        if (usernameFieldOnUsernamePage.getText().isBlank() || newUsername.getText().isBlank()) {
+            usernameOutPutMessage.setText("Empty Username Or new Username Given Please Enter Correct Values ");
+        } else if (owner.getOwner(usernameFieldOnUsernamePage.getText()) == null) {
+            usernameOutPutMessage.setText("Invalid Old Username");
+        } else if (newUsername.getText().length() < 5) {
+            usernameOutPutMessage.setText("New Username is Too short");
+        }else if(newUsername.getText().startsWith("OWN",2)){
+            usernameOutPutMessage.setText("Username Must Start With own");
+        }else {
+
+            int change = owner.editUsername(usernameFieldOnUsernamePage.getText(), newUsername.getText());
+
+            if (change == 1) {
+                usernameOutPutMessage.setText("Username Has Been Changed");
+                clear(usernameFieldOnUsernamePage,newUsername);
+
+            } else {
+                usernameOutPutMessage.setText("Username Has Not Been Chanegd");
+            }
+
+        }
+    }
+
+    @FXML
+    private void changePassword(ActionEvent event) {
+        if (usernameFieldOnPasswordPage.getText().isBlank() || newPassword.getText().isBlank()) {
+            passwordOutPutMessage.setText("Empty Password Or new Username Given Please Enter Correct Values ");
+        } else if (owner.getOwner(usernameFieldOnPasswordPage.getText()) == null) {
+            passwordOutPutMessage.setText("Invalid Username");
+        } else if (newPassword.getText().length() < 5) {
+            passwordOutPutMessage.setText("Password is Too short");
+        } else {
+
+            int change = owner.editPassword(usernameFieldOnPasswordPage.getText(), newPassword.getText());
+
+            if (change == 1) {
+                passwordOutPutMessage.setText("password Has Been Changed");
+                clear(usernameFieldOnPasswordPage,newPassword);
+
+            } else {
+                passwordOutPutMessage.setText("Password Has Not Been Chanegd");
+            }
+
+        }
     }
 
 }

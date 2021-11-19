@@ -36,8 +36,8 @@ public class OwnerQuries {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
             getOwner = connection.prepareStatement("SELECT * FROM  clinicdb.owner WHERE username = ?");
-            editUsername = connection.prepareStatement("UPDATE  clinicdb.owner SET username =? where id = ?  ");
-            editPassword = connection.prepareStatement("UPDATE  clinicdb.owner SET password =? where id = ?  ");
+            editUsername = connection.prepareStatement("UPDATE  clinicdb.owner SET username =? where username = ?  ");
+            editPassword = connection.prepareStatement("UPDATE  clinicdb.owner SET password =? where username = ?  ");
             getOwnerName = connection.prepareStatement("SELECT fullName FROM clinicdb.owner WHERE username = ?");
             editName = connection.prepareStatement("UPDATE clinicdb.owner SET fullName = ? WHERE username = ? ");
 
@@ -83,16 +83,10 @@ public class OwnerQuries {
         return null;
     }
 
-    public int editPassword(int id, String username, String password) {
+    public int editPassword(String username, String password) {
         try {
-            getOwner.setString(1, username);
-            ResultSet resultSet = getOwner.executeQuery();
-
-            if (resultSet.next() && login(username, password)) {
-                editPassword.setString(1, password);
-                editPassword.setInt(2, id);
-            }
-
+            editPassword.setString(1, password);
+            editPassword.setString(2, username);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -101,15 +95,14 @@ public class OwnerQuries {
 
     }
 
-    public int editUsername(String username) {
+    public int editUsername(String oldUsername, String newUsername) {
         try {
-            getOwner.setString(1, username);
-            ResultSet resultSet = getOwner.executeQuery();
+            editUsername.setString(1, newUsername);
+            editUsername.setString(2, oldUsername);
 
-            if (resultSet.next()) {
-                editUsername.setString(1, username);
-                editUsername.setInt(2, resultSet.getInt("id"));
-            }
+            editUsername.executeUpdate();
+
+            return 1;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
