@@ -119,4 +119,12 @@ public class OwnerScreenController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    private void refresh(ActionEvent event) {
+        numOfEmployees.setText(String.valueOf(repceptionest.NumOfReps() + mannger.numOfManngers()));
+        numOfDoctors.setText(String.valueOf(doctor.NumOfDoctors()));
+        numOfPatiance.setText(String.valueOf(patiant.numOfPatiants()));
+
+    }
+
 }
