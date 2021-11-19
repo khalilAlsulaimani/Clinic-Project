@@ -37,7 +37,6 @@ public class OwnerScreenController implements Initializable {
     @FXML
     private Label numOfEmployees;
 
-
     private OwnerQuries owner = new OwnerQuries();
     private ReceptionQuries repceptionest = new ReceptionQuries();
     private ManngerQuries mannger = new ManngerQuries();
@@ -45,7 +44,7 @@ public class OwnerScreenController implements Initializable {
     private PatiantQuries patiant = new PatiantQuries();
 
     public void getOwnerUsername(String usrname) {
-        welcomeLabel.setText("Welcome Back "+owner.getOwnerName(usrname));
+        welcomeLabel.setText("Welcome Back " + owner.getOwnerName(usrname));
 
     }
 

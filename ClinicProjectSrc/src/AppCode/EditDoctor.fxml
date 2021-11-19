@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="722.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="AppCode.EditDoctorController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="722.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppCode.EditDoctorController">
   <tabs>
     <Tab text="Add Doctor">
       <content>
@@ -60,10 +60,13 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="543.0" layoutY="205.0" mnemonicParsing="false" text="Delete" />
+                  <Button layoutX="543.0" layoutY="205.0" mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
                   <Label layoutX="147.0" layoutY="209.0" text="Enter ID Of Doctor To Delete :" />
-                  <TextField layoutX="327.0" layoutY="205.0" />
-                  <Label fx:id="deleteOutputMessage" alignment="CENTER" layoutX="11.0" layoutY="74.0" prefHeight="18.0" prefWidth="686.0" text="Label" />
+                  <TextField fx:id="deleteDocID" layoutX="327.0" layoutY="205.0" />
+                  <Label fx:id="deleteOutputMessage" alignment="CENTER" layoutX="11.0" layoutY="74.0" prefHeight="18.0" prefWidth="686.0" textFill="RED">
+                     <font>
+                        <Font name="Constantia" size="16.0" />
+                     </font></Label>
                </children></AnchorPane>
       </content>
     </Tab>
