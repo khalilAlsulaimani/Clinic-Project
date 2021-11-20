@@ -51,6 +51,6 @@
          </children>
       </GridPane>
       <Button layoutX="57.0" layoutY="491.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="70.0" text="Log Out" />
-      <Button layoutX="553.0" layoutY="491.0" mnemonicParsing="false" text="Refresh Stats" />
+      <Button layoutX="553.0" layoutY="491.0" mnemonicParsing="false" onAction="#refresh" text="Refresh Stats" />
    </children>
 </AnchorPane>

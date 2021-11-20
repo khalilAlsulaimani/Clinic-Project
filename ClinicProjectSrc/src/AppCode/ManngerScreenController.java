@@ -35,6 +35,10 @@ public class ManngerScreenController implements Initializable {
     private Label numOfReceps;
 
     private ManngerQuries mannger = new ManngerQuries();
+    private DoctorQuries doctor = new DoctorQuries();
+    private PatiantQuries patiantt = new PatiantQuries();
+    private ReceptionQuries Reception = new ReceptionQuries();
+    
 
     public void getManngerUsername(String username) {
         welcomeLabel.setText("Welcome Back " + mannger.getManngerName(username));
@@ -45,7 +49,16 @@ public class ManngerScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        numOfReceps.setText(String.valueOf(Reception.NumOfReps()));
+        numOfPatiants.setText(String.valueOf(patiantt.numOfPatiants()));
+        numOfDocs.setText(String.valueOf(doctor.NumOfDoctors()));
 
+    }
+    
+    public void refresh(){
+        numOfReceps.setText(String.valueOf(Reception.NumOfReps()));
+        numOfPatiants.setText(String.valueOf(patiantt.numOfPatiants()));
+        numOfDocs.setText(String.valueOf(doctor.NumOfDoctors()));
     }
 
     @FXML

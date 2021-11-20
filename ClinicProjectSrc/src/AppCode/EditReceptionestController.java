@@ -92,10 +92,10 @@ public class EditReceptionestController implements Initializable {
             int result = rep.addRecptionest(Integer.parseInt(ReceptionestID.getText()), fullName.getText(), username.getText(), password.getText());
             if (result == 1) {
                 addManngerOutputMessage.setTextFill(Color.BLUE);
-                addManngerOutputMessage.setText("ReceRptionest Was Added Succfully");
+                addManngerOutputMessage.setText("Receptionest Was Added Succfully");
                 clearAll();
             } else {
-                addManngerOutputMessage.setText("ReceRptionest Was Not Added Succfully");
+                addManngerOutputMessage.setText("Receptionest Was Not Added Succfully");
 
             }
 
