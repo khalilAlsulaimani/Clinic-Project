@@ -34,7 +34,7 @@
                      </children>
                   </GridPane>
                   <Button layoutX="428.0" layoutY="208.0" mnemonicParsing="false" onAction="#changeName" text="Apply Change" AnchorPane.leftAnchor="550.0" />
-                  <Label fx:id="nameOutPutMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="44.0" prefHeight="19.0" prefWidth="600.0" textFill="#f70303">
+                  <Label fx:id="nameOutPutMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="44.0" prefHeight="19.0" prefWidth="600.0" textFill="RED">
                      <font>
                         <Font name="Constantia" size="15.0" />
                      </font></Label>

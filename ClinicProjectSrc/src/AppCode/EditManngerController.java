@@ -23,30 +23,44 @@ public class EditManngerController implements Initializable {
 
     @FXML
     private TextField fullName;
+
     @FXML
     private TextField username;
+
     @FXML
     private TextField password;
+
     @FXML
     private TextField ManngerID;
+
     @FXML
     private Label addManngerOutputMessage;
+
     @FXML
     private TextField newUsername;
-    @FXML
-    private TextField editPasswordID;
+
     @FXML
     private TextField newPassword;
-    @FXML
-    private TextField deleteManngerID;
 
     private ManngerQuries mannger = new ManngerQuries();
+
     @FXML
     private Label editUsrenameOutputMessage;
+
     @FXML
     private Label deleteOutputMessage;
+
     @FXML
     private TextField editUsernameUsername;
+
+    @FXML
+    private Label editPasswordOutputMessage;
+
+    @FXML
+    private TextField editPasswordUsername;
+
+    @FXML
+    private TextField deleteManngerUsername;
 
     /**
      * Initializes the controller class.
@@ -57,10 +71,15 @@ public class EditManngerController implements Initializable {
     }
 
     private void clearAll() {
-        ManngerID.clear();
         fullName.clear();
         username.clear();
         password.clear();
+        ManngerID.clear();
+        newUsername.clear();
+        newPassword.clear();
+        editUsernameUsername.clear();
+        editPasswordUsername.clear();
+        deleteManngerUsername.clear();
 
     }
 
@@ -82,7 +101,7 @@ public class EditManngerController implements Initializable {
             if (result == 1) {
                 addManngerOutputMessage.setTextFill(Color.BLUE);
                 addManngerOutputMessage.setText("Mangger Was Added Succfully");
-                clear(event);
+                clearAll();
             } else {
                 addManngerOutputMessage.setText("Mangger Was Not Added Succfully");
 
@@ -130,6 +149,30 @@ public class EditManngerController implements Initializable {
 
     @FXML
     private void changePasword(ActionEvent event) {
+        editPasswordOutputMessage.setTextFill(Color.RED);
+        if (newPassword.getText().isBlank() || editPasswordUsername.getText().isBlank()) {
+            editPasswordOutputMessage.setText("Empty TextField Detected");
+
+        } else if (mannger.getMannger(editPasswordUsername.getText()) == null) {
+            editPasswordOutputMessage.setText("Invalid  Username");
+
+        } else if (newPassword.getText().length() < 3) {
+            editPasswordOutputMessage.setText("Password must be larger then 3  ");
+
+        } else {
+
+            int result = mannger.editPassword(editPasswordUsername.getText(), newPassword.getText());
+            if (result == 1) {
+                editPasswordOutputMessage.setTextFill(Color.BLUE);
+                editPasswordOutputMessage.setText("Password Was Changed Succfully");
+                clearAll();
+            } else {
+                editPasswordOutputMessage.setText("Password Was Not Changed Succfully");
+
+            }
+
+        }
+
     }
 
     @FXML
