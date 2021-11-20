@@ -65,7 +65,7 @@ public class EditOwnerController implements Initializable {
         } else if (owner.getOwner(usernameFieldOnNamePage.getText()) == null) {
             nameOutPutMessage.setText("Invalid Username ");
         } else if (newName.getText().length() < 5 || newName.getText().matches(".*\\d.*")) {
-            nameOutPutMessage.setText("Invalid Name");
+            nameOutPutMessage.setText("Full-name Cannont Contain A Number");
         } else {
 
             int change = owner.editName(usernameFieldOnNamePage.getText(), newName.getText());
@@ -92,8 +92,8 @@ public class EditOwnerController implements Initializable {
             usernameOutPutMessage.setText("Invalid Old Username");
         } else if (newUsername.getText().length() < 5) {
             usernameOutPutMessage.setText("New Username is Too short");
-        } else if (newUsername.getText().startsWith("OWN", 2)) {
-            usernameOutPutMessage.setText("Username Must Start With own");
+        } else if (!(newUsername.getText().toLowerCase().startsWith("own"))) {
+            usernameOutPutMessage.setText("Username Must Start With 'own'");
         } else {
 
             int change = owner.editUsername(usernameFieldOnUsernamePage.getText(), newUsername.getText());
