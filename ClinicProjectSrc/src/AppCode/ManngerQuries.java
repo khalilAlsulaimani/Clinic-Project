@@ -28,6 +28,7 @@ public class ManngerQuries {
     private PreparedStatement editUsername;
     private PreparedStatement editPassword;
     private PreparedStatement addReceptionest;
+    private PreparedStatement addMannger;
     private PreparedStatement getAllManggers;
 
     public ManngerQuries() {
@@ -35,9 +36,10 @@ public class ManngerQuries {
             connection = DriverManager.getConnection(URL, user, pass);
             getMannger = connection.prepareStatement("SELECT * FROM  clinicdb.mannger WHERE username = ?");
             editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where id = ?  ");
-            editPassword = connection.prepareStatement("UPDATE  clinicdb.mangger SET password =? where id = ?  ");
-            addReceptionest = connection.prepareStatement("UPDATE clinicdb.mangger SET receptionistID =? WHERE id =?");
+            editPassword = connection.prepareStatement("UPDATE  clinicdb.mannger SET password =? where id = ?  ");
+            addReceptionest = connection.prepareStatement("UPDATE clinicdb.mannger SET receptionistID =? WHERE id =?");
             getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  mannger");
+            addMannger = connection.prepareStatement("INSERT INTO clinicdb.mannger VALUES (?,?,NULL,?,?)");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -62,6 +64,21 @@ public class ManngerQuries {
         }
 
         return false;
+
+    }
+
+    public int addMannger(int id, String fullName, String username, String password) {
+        try {
+            addMannger.setInt(1, id);
+            addMannger.setString(2, fullName);
+            addMannger.setString(3, username);
+            addMannger.setString(4, password);
+            addMannger.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
 
     }
 
