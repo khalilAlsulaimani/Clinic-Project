@@ -30,12 +30,14 @@ public class ManngerQuries {
     private PreparedStatement addReceptionest;
     private PreparedStatement addMannger;
     private PreparedStatement getAllManggers;
+    private PreparedStatement checkID;
 
     public ManngerQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
+            checkID = connection.prepareStatement("SELECT * FROM clinicdb.mannger  id = ?");
             getMannger = connection.prepareStatement("SELECT * FROM  clinicdb.mannger WHERE username = ?");
-            editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where id = ?  ");
+            editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where username = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.mannger SET password =? where id = ?  ");
             addReceptionest = connection.prepareStatement("UPDATE clinicdb.mannger SET receptionistID =? WHERE id =?");
             getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  mannger");
@@ -66,6 +68,8 @@ public class ManngerQuries {
         return false;
 
     }
+
+   
 
     public int addMannger(int id, String fullName, String username, String password) {
         try {
@@ -119,21 +123,16 @@ public class ManngerQuries {
 
     }
 
-    public int editUsername(String username) {
+    public int editUsername(String oldUsername, String newUsername) {
         try {
-            getMannger.setString(1, username);
-            ResultSet resultSet = getMannger.executeQuery();
 
-            if (resultSet.next()) {
-                editUsername.setString(1, username);
-                editUsername.setInt(2, resultSet.getInt("id"));
-                editUsername.executeUpdate();
-            }
-
+            editUsername.setString(1, newUsername);
+            editUsername.setString(2, oldUsername);
+            editUsername.executeUpdate();
+            return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return 0;
 
     }
@@ -145,8 +144,10 @@ public class ManngerQuries {
             ResultSet result = getAllManggers.executeQuery();
             result.next();
             numOfReps = result.getInt("numOfRows");
+
         } catch (SQLException ex) {
-            Logger.getLogger(ReceptionQuries.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReceptionQuries.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
         return numOfReps;

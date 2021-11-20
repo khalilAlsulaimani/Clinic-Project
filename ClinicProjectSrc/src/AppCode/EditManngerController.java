@@ -32,8 +32,6 @@ public class EditManngerController implements Initializable {
     @FXML
     private Label addManngerOutputMessage;
     @FXML
-    private TextField editUsernameID;
-    @FXML
     private TextField newUsername;
     @FXML
     private TextField editPasswordID;
@@ -43,6 +41,12 @@ public class EditManngerController implements Initializable {
     private TextField deleteManngerID;
 
     private ManngerQuries mannger = new ManngerQuries();
+    @FXML
+    private Label editUsrenameOutputMessage;
+    @FXML
+    private Label deleteOutputMessage;
+    @FXML
+    private TextField editUsernameUsername;
 
     /**
      * Initializes the controller class.
@@ -50,6 +54,14 @@ public class EditManngerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    private void clearAll() {
+        ManngerID.clear();
+        fullName.clear();
+        username.clear();
+        password.clear();
+
     }
 
     @FXML
@@ -82,14 +94,38 @@ public class EditManngerController implements Initializable {
 
     @FXML
     private void clear(ActionEvent event) {
-        ManngerID.clear();
-        fullName.clear();
-        username.clear();
-        password.clear();
+        clearAll();
+
     }
 
     @FXML
     private void changeUsername(ActionEvent event) {
+        editUsrenameOutputMessage.setTextFill(Color.RED);
+        if (newUsername.getText().isBlank() || editUsernameUsername.getText().isBlank()) {
+            editUsrenameOutputMessage.setText("Empty TextField Detected");
+
+        } else if (mannger.getMannger(editUsernameUsername.getText()) == null) {
+            editUsrenameOutputMessage.setText("Invalid Old Username");
+
+        } else if (newUsername.getText().length() < 3) {
+            addManngerOutputMessage.setText("Username must be larger then 3  ");
+        } else if (!(newUsername.getText().toLowerCase().startsWith("man"))) {
+            editUsrenameOutputMessage.setText("New Username Must Start With 'man'");
+
+        } else {
+
+            int result = mannger.editUsername(editUsernameUsername.getText(), newUsername.getText());
+            if (result == 1) {
+                editUsrenameOutputMessage.setTextFill(Color.BLUE);
+                editUsrenameOutputMessage.setText("Username Was Changed Succfully");
+                clearAll();
+            } else {
+                editUsrenameOutputMessage.setText("Username Was Not Changed Succfully");
+
+            }
+
+        }
+
     }
 
     @FXML
