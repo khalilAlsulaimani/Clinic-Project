@@ -177,6 +177,27 @@ public class EditManngerController implements Initializable {
 
     @FXML
     private void deleteMannger(ActionEvent event) {
+        deleteOutputMessage.setTextFill(Color.RED);
+        if (deleteManngerUsername.getText().isBlank()) {
+            deleteOutputMessage.setText("Empty TextField Detected");
+
+        } else if (mannger.getMannger(deleteManngerUsername.getText()) == null) {
+            deleteOutputMessage.setText("Invalid  Username");
+
+        } else {
+
+            int result = mannger.deleteMannger(deleteManngerUsername.getText());
+            if (result == 1) {
+                deleteOutputMessage.setTextFill(Color.BLUE);
+                deleteOutputMessage.setText("Mannger Was Deleted Succfully");
+                clearAll();
+            } else {
+                deleteOutputMessage.setText("Mannger Was Not Deleted Succfully");
+
+            }
+
+        }
+
     }
 
 }

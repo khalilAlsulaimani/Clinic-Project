@@ -30,19 +30,18 @@ public class ManngerQuries {
     private PreparedStatement addReceptionest;
     private PreparedStatement addMannger;
     private PreparedStatement getAllManggers;
-    private PreparedStatement checkID;
+    private PreparedStatement deleteMannger;
 
     public ManngerQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
-            checkID = connection.prepareStatement("SELECT * FROM clinicdb.mannger  id = ?");
             getMannger = connection.prepareStatement("SELECT * FROM  clinicdb.mannger WHERE username = ?");
             editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where username = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.mannger SET password =? where username = ?  ");
-            addReceptionest = connection.prepareStatement("UPDATE clinicdb.mannger SET receptionistID =? WHERE id =?");
+            addReceptionest = connection.prepareStatement("UPDATE clinicdb.mannger SET receptionistID =? WHERE username =?");
             getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  mannger");
             addMannger = connection.prepareStatement("INSERT INTO clinicdb.mannger VALUES (?,?,NULL,?,?)");
-
+            deleteMannger = connection.prepareStatement("DELETE FROM clinicdb.mannger WHERE username = ?");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -146,6 +145,18 @@ public class ManngerQuries {
         }
 
         return numOfReps;
+    }
+
+    public int deleteMannger(String username) {
+        try {
+            deleteMannger.setString(1, username);
+            deleteMannger.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+
     }
 
 }

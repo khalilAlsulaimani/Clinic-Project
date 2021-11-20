@@ -121,7 +121,7 @@ public class LogInScreenController implements Initializable {
                 failedLogin();
             }
         } else {
-            errorLabel.setText("invalid username!");
+            errorLabel.setText("Invalid Username");
         }
 
     }
