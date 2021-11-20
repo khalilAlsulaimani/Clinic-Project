@@ -31,10 +31,12 @@ public class ManngerQuries {
     private PreparedStatement addMannger;
     private PreparedStatement getAllManggers;
     private PreparedStatement deleteMannger;
+    private PreparedStatement getManngerName;
 
     public ManngerQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
+            getManngerName = connection.prepareStatement("SELECT fullName FROM clinicdb.mannger WHERE username = ?");
             getMannger = connection.prepareStatement("SELECT * FROM  clinicdb.mannger WHERE username = ?");
             editUsername = connection.prepareStatement("UPDATE  clinicdb.mannger SET username =? where username = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.mannger SET password =? where username = ?  ");
@@ -66,6 +68,19 @@ public class ManngerQuries {
 
         return false;
 
+    }
+
+    public String getManngerName(String username) {
+        try {
+            getManngerName.setString(1, username);
+            ResultSet result = getManngerName.executeQuery();
+            if (result.next()) {
+                return result.getString("fullName");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public int addMannger(int id, String fullName, String username, String password) {

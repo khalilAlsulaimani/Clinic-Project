@@ -60,6 +60,8 @@ public class LogInScreenController implements Initializable {
         } else if (who.equals("man")) {
             loader = new FXMLLoader(getClass().getResource("ManngerScreen.fxml"));
             root = loader.load();
+            ManngerScreenController manngerController = loader.getController();
+            manngerController.getManngerUsername(usernameInput.getText());
         } else {
             loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
             root = loader.load();

@@ -31,9 +31,9 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label fx:id="welcomeLabel" contentDisplay="CENTER" layoutX="121.0" layoutY="55.0" prefHeight="26.0" prefWidth="461.0" textAlignment="JUSTIFY">
+      <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="121.0" layoutY="55.0" prefHeight="26.0" prefWidth="461.0" textAlignment="JUSTIFY">
          <font>
-            <Font size="19.0" />
+            <Font name="Constantia" size="19.0" />
          </font></Label>
       <GridPane layoutX="146.0" layoutY="114.0" prefHeight="278.0" prefWidth="412.0">
         <columnConstraints>

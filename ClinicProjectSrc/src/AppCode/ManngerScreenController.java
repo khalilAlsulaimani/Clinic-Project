@@ -34,13 +34,19 @@ public class ManngerScreenController implements Initializable {
     @FXML
     private Label numOfReceps;
 
+    private ManngerQuries mannger = new ManngerQuries();
+
+    public void getManngerUsername(String username) {
+        welcomeLabel.setText("Welcome Back " + mannger.getManngerName(username));
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+
+    }
 
     @FXML
     private void logOut(ActionEvent event) throws IOException {
@@ -58,16 +64,29 @@ public class ManngerScreenController implements Initializable {
     }
 
     @FXML
-    private void editMangs(ActionEvent event) {
+    private void editDocs(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditDoctor.fxml"));
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Doctors Window");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    private void editDocs(ActionEvent event) {
+    private void editReps(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditReceptionest.fxml"));
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Receptionest Window");
+        stage.setScene(scene);
+        stage.show();
     }
 
-    @FXML
-    private void editReps(ActionEvent event) {
-    }
-
-    
 }

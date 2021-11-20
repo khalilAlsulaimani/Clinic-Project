@@ -31,17 +31,19 @@ public class ReceptionQuries {
     private PreparedStatement editPassword;
     private PreparedStatement addMannger;
     private PreparedStatement addReceptionest;
-    private PreparedStatement getAllReps; 
+    private PreparedStatement getAllReps;
+    private PreparedStatement deleteReceptionest;
 
     public ReceptionQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
-            
+
+            deleteReceptionest = connection.prepareStatement("DELETE FROM clinicdb.receptionist WHERE username = ?");
             getReceptionist = connection.prepareStatement("SELECT * FROM  clinicdb.receptionist WHERE username = ?");
-            editUsername = connection.prepareStatement("UPDATE  clinicdb.receptionist SET username =? where id = ?  ");
-            editPassword = connection.prepareStatement("UPDATE  clinicdb.receptionist SET password =? where id = ?  ");
-            addMannger = connection.prepareStatement("UPDATE clinicdb.receptionist SET manngerID =? WHERE id =?");
-            addReceptionest = connection.prepareStatement("INSERT INTO clinicdb.receptionist VALUES(?,?,?,?,?)");
+            editUsername = connection.prepareStatement("UPDATE  clinicdb.receptionist SET username =? where username = ?  ");
+            editPassword = connection.prepareStatement("UPDATE  clinicdb.receptionist SET password =? where username = ?  ");
+            addMannger = connection.prepareStatement("UPDATE clinicdb.receptionist SET manngerID =? WHERE username =?");
+            addReceptionest = connection.prepareStatement("INSERT INTO clinicdb.receptionist VALUES(?,?,NULL,?,?)");
             getAllReps = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  receptionist");
 
         } catch (SQLException ex) {
@@ -77,7 +79,7 @@ public class ReceptionQuries {
 
             if (resultSet.next()) {
                 Repceptionest result = new Repceptionest(resultSet.getInt("id"), resultSet.getString("fullname"), username,
-                        resultSet.getString("password"),resultSet.getInt("manngerID"));
+                        resultSet.getString("password"), resultSet.getInt("manngerID"));
                 return result;
             }
 
@@ -87,15 +89,13 @@ public class ReceptionQuries {
         return null;
     }
 
-    public int editPassword(int id, String username, String password) {
+    public int editPassword(String username, String password) {
         try {
-            getReceptionist.setString(1, username);
-            ResultSet resultSet = getReceptionist.executeQuery();
 
-            if (resultSet.next() && login(username, password)) {
-                editPassword.setString(1, password);
-                editPassword.setInt(2, id);
-            }
+            editPassword.setString(1, password);
+            editPassword.setString(2, username);
+            editPassword.executeUpdate();
+            return 1;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -105,16 +105,13 @@ public class ReceptionQuries {
 
     }
 
-    public int editUsername(int id, String username, String password) {
+    public int editUsername(String oldUsername, String newUsername) {
+
         try {
-            getReceptionist.setString(1, username);
-            ResultSet resultSet = getReceptionist.executeQuery();
-
-            if (resultSet.next()) {
-                editPassword.setString(1, password);
-                editPassword.setInt(2, id);
-            }
-
+            editUsername.setString(1, newUsername);
+            editUsername.setString(2, oldUsername);
+            editUsername.executeUpdate();
+            return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -122,19 +119,49 @@ public class ReceptionQuries {
         return 0;
 
     }
-    
-    public int NumOfReps(){
-        int numOfReps=0;
-        
-        try{
+
+    public int NumOfReps() {
+        int numOfReps = 0;
+
+        try {
             ResultSet result = getAllReps.executeQuery();
             result.next();
             numOfReps = result.getInt("numOfRows");
+
         } catch (SQLException ex) {
-            Logger.getLogger(ReceptionQuries.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReceptionQuries.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return numOfReps;
+    }
+
+    int addRecptionest(int id, String fullName, String username, String password) {
+
+        try {
+            addReceptionest.setInt(1, id);
+            addReceptionest.setString(2, fullName);
+            addReceptionest.setString(3, username);
+            addReceptionest.setString(4, password);
+            addReceptionest.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
+    }
+
+    public int deleteReceptionest(String username) {
+        try {
+            deleteReceptionest.setString(1, username);
+            deleteReceptionest.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+
     }
 
 }
