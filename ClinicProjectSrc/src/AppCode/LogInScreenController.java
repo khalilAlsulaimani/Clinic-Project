@@ -131,8 +131,9 @@ public class LogInScreenController implements Initializable {
             if (owner.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
                 changeScreen(event, "own");
-                isFirstLogin(event, "own", username);
-
+                if (owner.isFirstLogin(usernameInput.getText())) {
+                    isFirstLogin(event, "own", username);
+                }
             } else {
                 failedLogin();
             }

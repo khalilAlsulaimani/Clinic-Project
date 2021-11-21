@@ -31,6 +31,8 @@ public class OwnerQuries {
     private PreparedStatement editPassword;
     private PreparedStatement getOwnerName;
     private PreparedStatement editName;
+    private PreparedStatement isFirstLogin;
+    private PreparedStatement changeisFirstLogin;
 
     public OwnerQuries() {
         try {
@@ -40,9 +42,41 @@ public class OwnerQuries {
             editPassword = connection.prepareStatement("UPDATE  clinicdb.owner SET password =? where username = ?  ");
             getOwnerName = connection.prepareStatement("SELECT fullName FROM clinicdb.owner WHERE username = ?");
             editName = connection.prepareStatement("UPDATE clinicdb.owner SET fullName = ? WHERE username = ? ");
+            isFirstLogin = connection.prepareStatement("SELECT isFirstLogin from clinicdb.owner WHERE username = ?");
+            changeisFirstLogin = connection.prepareStatement("UPDATE clinicdb.owner SET isFirstLogin = 0 WHERE username=?");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public boolean isFirstLogin(String username) {
+        try {
+            isFirstLogin.setString(1, username);
+            ResultSet result = isFirstLogin.executeQuery();
+            result.next();
+            int res = result.getInt("isFirstLogin");
+            if (res == 0) {
+                return false;
+            } else {
+                System.out.print("true");
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
+    public void changeisFirstLogin(String username) {
+        try {
+            changeisFirstLogin.setString(1, username);
+            changeisFirstLogin.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

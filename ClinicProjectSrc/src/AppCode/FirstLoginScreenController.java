@@ -71,6 +71,7 @@ public class FirstLoginScreenController implements Initializable {
                 if (change1 == 1 && change2 == 1) {
                     outputMessage.setTextFill(Color.BLUE);
                     outputMessage.setText("Login Information Has Been Changed");
+                    owner.changeisFirstLogin(newUsername.getText());
                     clear(newPassword, newUsername);
 
                 } else {
