@@ -127,7 +127,16 @@ public class ReceptionScreenController implements Initializable {
     }
 
     @FXML
-    private void makeAppoitmentsButton(ActionEvent event) {
+    private void makeAppoitmentsButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MakeAppoitmentScreen.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("ICare Applications 1.0");
+
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     @FXML
