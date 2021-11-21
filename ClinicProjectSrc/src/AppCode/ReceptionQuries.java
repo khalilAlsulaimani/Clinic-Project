@@ -33,6 +33,8 @@ public class ReceptionQuries {
     private PreparedStatement addReceptionest;
     private PreparedStatement getAllReps;
     private PreparedStatement deleteReceptionest;
+    private PreparedStatement isFirstLogin;
+    private PreparedStatement changeisFirstLogin;
 
     public ReceptionQuries() {
         try {
@@ -45,9 +47,42 @@ public class ReceptionQuries {
             addMannger = connection.prepareStatement("UPDATE clinicdb.receptionist SET manngerID =? WHERE username =?");
             addReceptionest = connection.prepareStatement("INSERT INTO clinicdb.receptionist VALUES(?,?,NULL,?,?)");
             getAllReps = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  receptionist");
+            isFirstLogin = connection.prepareStatement("SELECT isFirstLogin from clinicdb.receptionist WHERE username = ?");
+            changeisFirstLogin = connection.prepareStatement("UPDATE clinicdb.receptionist SET isFirstLogin = 0 WHERE username=?");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+    
+     public boolean isFirstLogin(String username) {
+        try {
+            isFirstLogin.setString(1, username);
+            ResultSet result = isFirstLogin.executeQuery();
+            result.next();
+            int res = result.getInt("isFirstLogin");
+            if (res == 0) {
+                System.out.print("false");
+                return false;
+            } else {
+                System.out.print("true");
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
+    public void changeisFirstLogin(String username) {
+        try {
+            changeisFirstLogin.setString(1, username);
+            changeisFirstLogin.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

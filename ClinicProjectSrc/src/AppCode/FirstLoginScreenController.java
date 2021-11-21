@@ -32,6 +32,7 @@ public class FirstLoginScreenController implements Initializable {
 
     private ManngerQuries mannger = new ManngerQuries();
     private OwnerQuries owner = new OwnerQuries();
+    private ReceptionQuries reception = new ReceptionQuries();
 
     public void getWho(String username) {
         whoToChange = username;
@@ -81,7 +82,6 @@ public class FirstLoginScreenController implements Initializable {
             }
 
         } else if (whoToChange.toLowerCase().startsWith("man")) {
-            System.out.println("mannger");
             outputMessage.setTextFill(Color.RED);
             if (newUsername.getText().isBlank()) {
                 outputMessage.setText("Empty New Password Or new Username Given Please Enter Correct Values ");
@@ -107,6 +107,29 @@ public class FirstLoginScreenController implements Initializable {
             }
 
         } else {
+             outputMessage.setTextFill(Color.RED);
+            if (newUsername.getText().isBlank()) {
+                outputMessage.setText("Empty New Password Or new Username Given Please Enter Correct Values ");
+
+            } else if (newUsername.getText().length() < 5) {
+                outputMessage.setText("Inputs Are Too Small is Too Small ,Username min is 5 ,Password min is 3");
+            } else if (!(newUsername.getText().toLowerCase().startsWith("rep"))) {
+                outputMessage.setText("Username Must Start With 'rep'");
+            } else {
+
+                int change1 = reception.editPassword(whoToChange, newPassword.getText());
+                int change2 = reception.editUsername(whoToChange, newUsername.getText());
+
+                if (change1 == 1 && change2 == 1) {
+                    outputMessage.setTextFill(Color.BLUE);
+                    outputMessage.setText("Login Information Has Been Changed");
+                    reception.changeisFirstLogin(newUsername.getText());
+                    clear(newPassword, newUsername);
+
+                } else {
+                    outputMessage.setText("Login Information Has Not Been Chanegd");
+                }
+            }
 
         }
 
