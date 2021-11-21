@@ -41,13 +41,19 @@ public class ReceptionScreenController implements Initializable {
     private TextField id;
     @FXML
     private ComboBox<?> doctorsComboBox;
-    
+
     private String repsUsername;
+    
+    private ReceptionQuries reps = new ReceptionQuries();
+    
     private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
     private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
     private LocalDateTime now = LocalDateTime.now();
     
     
+    public void getRepsName(String username) {
+        repsUsername = username;
+    }
 
     /**
      * Initializes the controller class.
@@ -75,7 +81,13 @@ public class ReceptionScreenController implements Initializable {
 
     @FXML
     private void logOut(ActionEvent event) throws IOException {
-        
+        File file = new File("D:\\1-Desktop\\uni\\Year 3\\Advanced Programming Practical\\Clinic Project\\logs\\" + date.format(now) + ".txt");
+
+        FileWriter fileWrite = new FileWriter(file, true);
+        try ( BufferedWriter writer = new BufferedWriter(fileWrite)) {
+            writer.write(repsUsername + ": " + " Logged Out At " + time.format(now) + "\n---------------------------------\n");
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
         ((Node) event.getSource()).getScene().getWindow().hide();
 

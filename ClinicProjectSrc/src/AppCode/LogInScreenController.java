@@ -65,6 +65,8 @@ public class LogInScreenController implements Initializable {
         } else {
             loader = new FXMLLoader(getClass().getResource("ReceptionScreen.fxml"));
             root = loader.load();
+            ReceptionScreenController repsController = loader.getController();
+            repsController.getRepsName(usernameInput.getText());
         }
 
         ((Node) event.getSource()).getScene().getWindow().hide();

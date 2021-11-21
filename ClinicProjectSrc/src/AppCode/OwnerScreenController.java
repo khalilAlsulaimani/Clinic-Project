@@ -143,4 +143,17 @@ public class OwnerScreenController implements Initializable {
 
     }
 
+    @FXML
+    private void editReps(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditReceptionest.fxml"));
+
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Receptionest Window");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }
