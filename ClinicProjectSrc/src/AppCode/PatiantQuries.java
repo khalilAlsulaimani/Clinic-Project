@@ -76,4 +76,21 @@ public class PatiantQuries {
         return numOfReps;
     }
 
+    public int addPatiant(int id, String fullName,int doctorID, int age, int number) {
+
+        try {
+            addpatiant.setInt(1, id);
+            addpatiant.setString(2, fullName);
+            addpatiant.setInt(3,doctorID);
+            addpatiant.setInt(4, age);
+            addpatiant.setInt(5, number);
+            addpatiant.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(PatiantQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
+    }
+
 }

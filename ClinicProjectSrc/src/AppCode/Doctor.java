@@ -16,10 +16,9 @@ public class Doctor {
     private int patiantID;
     private String field;
 
-    public Doctor(int id, String fullname, int patiantID, String field) {
+    public Doctor(int id, String fullname, String field) {
         setId(id);
         setFullname(fullname);
-        setPatiantID(patiantID);
         setField(field);
 
     }

@@ -10,8 +10,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -28,11 +32,13 @@ public class DoctorQuries {
     private PreparedStatement addDoctor;
     private PreparedStatement deleteDoctor;
     private PreparedStatement getAllDoctors;
+    private PreparedStatement getAll;
 
     public DoctorQuries() {
         try {
             connection = DriverManager.getConnection(URL, user, pass);
 
+            getAll = connection.prepareStatement("SELECT * FROM clinicdb.doctor ");
             getDoctor = connection.prepareStatement("SELECT * FROM  clinicdb.doctor WHERE id = ?");
             deleteDoctor = connection.prepareStatement("DELETE FROM clinicdb.doctor WHERE id = ?");
             addDoctor = connection.prepareStatement("INSERT INTO clinicdb.doctor VALUES(?,?,NULL,?)");
@@ -43,6 +49,22 @@ public class DoctorQuries {
         }
     }
 
+    public ObservableList<Doctor> getAllDoctors() {
+        try {
+            ResultSet resultSet = getAll.executeQuery();
+            ObservableList<Doctor> result = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                result.add(new Doctor(resultSet.getInt("id"), resultSet.getString("fullName"), resultSet.getString("field")));
+
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(DoctorQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
     public Doctor getDoctor(int id) {
 
         try {
@@ -50,8 +72,7 @@ public class DoctorQuries {
             ResultSet resultSet = getDoctor.executeQuery();
 
             if (resultSet.next()) {
-                Doctor result = new Doctor(resultSet.getInt("id"), resultSet.getString("fullname"), resultSet.getInt("paitiontID"),
-                        resultSet.getString("field"));
+                Doctor result = new Doctor(resultSet.getInt("id"), resultSet.getString("fullname"), resultSet.getString("field"));
                 return result;
             }
 
