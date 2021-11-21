@@ -96,11 +96,42 @@ public class LogInScreenController implements Initializable {
 
     }
 
+    private void isFirstLogin(ActionEvent event, String who, String username) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
+        Parent root;
+        if (who.equals("own")) {
+            loader = new FXMLLoader(getClass().getResource("FirstLoginScreen.fxml"));
+            root = loader.load();
+            FirstLoginScreenController firstLogin = loader.getController();
+            firstLogin.getWho(usernameInput.getText());
+
+        } else if (who.equals("man")) {
+            loader = new FXMLLoader(getClass().getResource("FirstLoginScreen.fxml"));
+            root = loader.load();
+            FirstLoginScreenController firstLogin = loader.getController();
+            firstLogin.getWho(usernameInput.getText());
+        } else {
+            loader = new FXMLLoader(getClass().getResource("FirstLoginScreen.fxml"));
+            root = loader.load();
+            FirstLoginScreenController firstLogin = loader.getController();
+            firstLogin.getWho(usernameInput.getText());
+        }
+
+        ((Node) event.getSource()).getScene().getWindow().hide();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Change Defult Login Infromation");
+        stage.show();
+    }
+
     private void login(String username, String password, ActionEvent event) throws IOException {
         if (username.startsWith("OWN") || username.startsWith("own")) {
             if (owner.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
                 changeScreen(event, "own");
+                isFirstLogin(event, "own", username);
 
             } else {
                 failedLogin();
@@ -110,6 +141,9 @@ public class LogInScreenController implements Initializable {
             if (mannger.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
                 changeScreen(event, "man");
+                if (mannger.isFirstLogin(usernameInput.getText())) {
+                    isFirstLogin(event, "man", username);
+                }
 
             } else {
                 failedLogin();
@@ -118,6 +152,7 @@ public class LogInScreenController implements Initializable {
             if (receptionest.login(usernameInput.getText(), passwordInput.getText())) {
                 loginLog(username);
                 changeScreen(event, "rep");
+                isFirstLogin(event, "rep", username);
 
             } else {
                 failedLogin();

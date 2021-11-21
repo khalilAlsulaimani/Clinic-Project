@@ -32,6 +32,8 @@ public class ManngerQuries {
     private PreparedStatement getAllManggers;
     private PreparedStatement deleteMannger;
     private PreparedStatement getManngerName;
+    private PreparedStatement isFirstLogin;
+    private PreparedStatement changeisFirstLogin;
 
     public ManngerQuries() {
         try {
@@ -44,6 +46,9 @@ public class ManngerQuries {
             getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  mannger");
             addMannger = connection.prepareStatement("INSERT INTO clinicdb.mannger VALUES (?,?,NULL,?,?)");
             deleteMannger = connection.prepareStatement("DELETE FROM clinicdb.mannger WHERE username = ?");
+            isFirstLogin = connection.prepareStatement("SELECT isFirstLogin from clinicdb.mannger WHERE username = ?");
+            changeisFirstLogin = connection.prepareStatement("UPDATE clinicdb.mannger SET isFirstLogin = 0 WHERE username=?");
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -68,6 +73,37 @@ public class ManngerQuries {
 
         return false;
 
+    }
+
+    public boolean isFirstLogin(String username) {
+        try {
+            isFirstLogin.setString(1, username);
+            ResultSet result = isFirstLogin.executeQuery();
+            result.next();
+            int res = result.getInt("isFirstLogin");
+            if (res == 0) {
+                System.out.print("false");
+                return false;
+            } else {
+                System.out.print("true");
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
+    public void changeisFirstLogin(String username) {
+        try {
+            changeisFirstLogin.setString(1, username);
+            changeisFirstLogin.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManngerQuries.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getManngerName(String username) {
