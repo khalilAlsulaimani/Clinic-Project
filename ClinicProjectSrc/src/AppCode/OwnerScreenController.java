@@ -5,12 +5,14 @@
  */
 package AppCode;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +39,12 @@ public class OwnerScreenController implements Initializable {
     @FXML
     private Label numOfEmployees;
 
+    private String ownerUsername;
+
+    private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
+    private LocalDateTime now = LocalDateTime.now();
+
     private OwnerQuries owner = new OwnerQuries();
     private ReceptionQuries repceptionest = new ReceptionQuries();
     private ManngerQuries mannger = new ManngerQuries();
@@ -45,6 +53,7 @@ public class OwnerScreenController implements Initializable {
 
     public void getOwnerUsername(String usrname) {
         welcomeLabel.setText("Welcome Back " + owner.getOwnerName(usrname));
+        ownerUsername = usrname;
 
     }
 
@@ -65,11 +74,18 @@ public class OwnerScreenController implements Initializable {
 
     @FXML
     private void logOut(ActionEvent event) throws IOException {
+
+        File file = new File("D:\\1-Desktop\\uni\\Year 3\\Advanced Programming Practical\\Clinic Project\\logs\\" + date.format(now) + ".txt");
+
+        FileWriter fileWrite = new FileWriter(file, true);
+        try (BufferedWriter writer = new BufferedWriter(fileWrite)) {
+            writer.write(ownerUsername + ": " + " Logged Out At " + time.format(now) + "\n---------------------------------\n");
+        }
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
         ((Node) event.getSource()).getScene().getWindow().hide();
 
         Parent root = loader.load();
-        LogInScreenController scene2contr = loader.getController();
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);

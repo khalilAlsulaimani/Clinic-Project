@@ -5,8 +5,13 @@
  */
 package AppCode;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +41,13 @@ public class ReceptionScreenController implements Initializable {
     private TextField id;
     @FXML
     private ComboBox<?> doctorsComboBox;
+    
+    private String repsUsername;
+    private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
+    private LocalDateTime now = LocalDateTime.now();
+    
+    
 
     /**
      * Initializes the controller class.
@@ -53,20 +65,17 @@ public class ReceptionScreenController implements Initializable {
     private void printDoctorsListButton(ActionEvent event) {
     }
 
-
     @FXML
     private void printAppoitmentsButton(ActionEvent event) {
     }
 
-    
-
-
     @FXML
     private void makeAppoitmentsButton(ActionEvent event) {
     }
-    
+
     @FXML
     private void logOut(ActionEvent event) throws IOException {
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
         ((Node) event.getSource()).getScene().getWindow().hide();
 
