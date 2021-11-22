@@ -13,14 +13,14 @@ import java.util.Date;
  */
 public class Appoitment {
 
-    private Date time;
+    private int time;
     private Date date;
     private int patiantID;
     private String patiantName;
     private int doctorID;
     private String doctorName;
 
-    Appoitment(Date time, Date date, int patiantID, String patiantName, int doctorID, String doctorName) {
+    Appoitment(int time, Date date, int patiantID, String patiantName, int doctorID, String doctorName) {
         setTime(time);
         setDate(date);
         setPatiantID(patiantID);
@@ -30,11 +30,11 @@ public class Appoitment {
 
     }
 
-    public Date getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(int time) {
         this.time = time;
     }
 

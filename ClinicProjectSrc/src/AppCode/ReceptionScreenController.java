@@ -97,7 +97,8 @@ public class ReceptionScreenController implements Initializable {
             outputMessage.setText("Empty TextField Detected");
         } else if (name.getText().matches(".*\\d.*")) {
             outputMessage.setText("Full-name Cannot Contain  Number");
-
+        }else if(number.getText().length()!=10){
+            outputMessage.setText("Number Must contain 10 numbers");
         } else {
             selectedDoc = doctorsComboBox.getSelectionModel().getSelectedIndex();
             int result = patiance.addPatiant(Integer.parseInt(id.getText()), name.getText(), listOfDocs.get(selectedDoc).getId(),
