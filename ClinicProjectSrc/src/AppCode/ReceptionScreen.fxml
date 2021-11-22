@@ -19,14 +19,13 @@
         <menus>
             <Menu mnemonicParsing="false" text="Doctors">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#doctorsListButton" text="Doctors List" />
                   <MenuItem mnemonicParsing="false" onAction="#printDoctorsListButton" text="Print Doctor List" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Appoitments">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#makeAppoitmentsButton" text="Make Appoitment" />
-                <MenuItem mnemonicParsing="false" onAction="#printAppoitmentsButton" text="Print Appoitment" />
+                  <MenuItem mnemonicParsing="false" onAction="#makeAppoitmentsButton" text="Book Appoitment" />
+                  <MenuItem mnemonicParsing="false" onAction="#printAppoitment" text="Print Appoitment" />
               </items>
             </Menu>
         </menus>

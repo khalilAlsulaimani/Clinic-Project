@@ -122,11 +122,7 @@ public class ReceptionScreenController implements Initializable {
         return String.format("%" + n + "s", s);
     }
 
-    @FXML
-    private void doctorsListButton(ActionEvent event) {
-
-    }
-
+   
     @FXML
     private void printDoctorsListButton(ActionEvent event) {
         try {
@@ -156,9 +152,6 @@ public class ReceptionScreenController implements Initializable {
         }
     }
 
-    @FXML
-    private void printAppoitmentsButton(ActionEvent event) {
-    }
 
     @FXML
     private void makeAppoitmentsButton(ActionEvent event) throws IOException {
@@ -194,6 +187,11 @@ public class ReceptionScreenController implements Initializable {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+
+    @FXML
+    private void printAppoitment(ActionEvent event) {
     }
 
 }
