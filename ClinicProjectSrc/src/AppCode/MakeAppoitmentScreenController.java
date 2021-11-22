@@ -60,9 +60,9 @@ public class MakeAppoitmentScreenController implements Initializable {
         }
 
         SpinnerValueFactory<Integer> valueFactory
-                = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 16);
+                = new SpinnerValueFactory.IntegerSpinnerValueFactory(8, 16);
 
-        valueFactory.setValue(1);
+        valueFactory.setValue(8);
 
         hour.setValueFactory(valueFactory);
 
@@ -70,13 +70,17 @@ public class MakeAppoitmentScreenController implements Initializable {
 
     @FXML
     private void makeAppoitment(ActionEvent event) {
+        Date gettedDatePickerDate = Date.valueOf(date.getValue());
+        selectedDoc = doctorSelction.getSelectionModel().getSelectedIndex();
         outputMessage.setTextFill(Color.RED);
         if (date.getValue().equals(null) || patiantID.getText().isBlank() || doctorSelction.getSelectionModel().isEmpty()) {
             outputMessage.setText("Empty TextField Detected");
         } else if (patiant.getPatiant(Integer.parseInt(patiantID.getText())) == null) {
             outputMessage.setText("Patiant ID Is Incorrect");
+        }else if(appoitmnet.checkIfBooked(hour.getValue(), gettedDatePickerDate,listOfDocs.get(selectedDoc).getId())){
+            outputMessage.setText("Appoitment Already Booked With That Doctor On That Date and Time");
         } else {
-            Date gettedDatePickerDate = Date.valueOf(date.getValue());
+            
             Patiant thePatiant = patiant.getPatiant(Integer.parseInt(patiantID.getText()));
             selectedDoc = doctorSelction.getSelectionModel().getSelectedIndex();
             int result = appoitmnet.bookAppoitment(hour.getValue(), gettedDatePickerDate, Integer.parseInt(patiantID.getText()), thePatiant.getFullName(),
