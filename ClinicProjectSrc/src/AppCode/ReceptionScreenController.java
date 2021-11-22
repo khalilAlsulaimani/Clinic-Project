@@ -13,7 +13,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,11 +52,10 @@ public class ReceptionScreenController implements Initializable {
     private DoctorQuries doctor = new DoctorQuries();
 
     private String repsUsername;
+    private AppoitmentQuary appoitment = new AppoitmentQuary();
     private PatiantQuries patiance = new PatiantQuries();
 
     private int selectedDoc;
-
-    private ReceptionQuries reps = new ReceptionQuries();
 
     private DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
     private DateTimeFormatter date = DateTimeFormatter.ofPattern("yyy-MM-dd");
@@ -64,6 +66,7 @@ public class ReceptionScreenController implements Initializable {
     private Label outputMessage;
 
     ObservableList<Doctor> listOfDocs = FXCollections.observableArrayList();
+    List<Appoitment> listOfAppoitments = new ArrayList<>();
 
     public void getRepsName(String username) {
         repsUsername = username;
@@ -78,6 +81,7 @@ public class ReceptionScreenController implements Initializable {
         for (int i = 0; i < listOfDocs.size(); i++) {
             doctorsComboBox.getItems().add(listOfDocs.get(i).getFullname());
         }
+        listOfAppoitments.addAll(appoitment.getTodaysAppoitments(Date.valueOf(date.format(now))));
 
     }
 
@@ -114,15 +118,6 @@ public class ReceptionScreenController implements Initializable {
         }
     }
 
-    public static String padRight(String s, int n) {
-        return String.format("%-" + n + "s", s);
-    }
-
-    public static String padLeft(String s, int n) {
-        return String.format("%" + n + "s", s);
-    }
-
-   
     @FXML
     private void printDoctorsListButton(ActionEvent event) {
         try {
@@ -151,7 +146,6 @@ public class ReceptionScreenController implements Initializable {
             System.out.println("error");
         }
     }
-
 
     @FXML
     private void makeAppoitmentsButton(ActionEvent event) throws IOException {
@@ -189,9 +183,43 @@ public class ReceptionScreenController implements Initializable {
         stage.show();
     }
 
-
     @FXML
     private void printAppoitment(ActionEvent event) {
+
+        try {
+
+            if (listOfAppoitments.isEmpty()) {
+                outputMessage.setText("No Appoitments Have Been Booked Today");
+
+            } else {
+                File file = new File("D:\\1-Desktop\\uni\\Year 3\\Advanced Programming Practical\\Clinic Project\\Prints\\"
+                        + date.format(now) + " " + "Appoitments Report" + ".txt");
+
+                FileWriter fileWrite = new FileWriter(file);
+                BufferedWriter writer = new BufferedWriter(fileWrite);
+
+                for (int i = 0; i < listOfAppoitments.size(); i++) {
+                    writer.write("--------------------------------\n");
+                    writer.write("|                              |\n");
+                    writer.write("|                              |\n");
+                    writer.write("|Time : " + listOfAppoitments.get(i).getTime() + "\n");
+                    writer.write("|Doctor Name: " + listOfAppoitments.get(i).getDoctorName() + "\n");
+                    writer.write("|Patiant Name: " + listOfAppoitments.get(i).getPatiantName() + "\n");
+                    writer.write("|                              |\n");
+                    writer.write("|                              |\n");
+                    writer.write("--------------------------------\n");
+                }
+
+                writer.close();
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+
+            }
+
+        } catch (IOException ex) {
+            System.out.println("error");
+
+        }
     }
 
 }

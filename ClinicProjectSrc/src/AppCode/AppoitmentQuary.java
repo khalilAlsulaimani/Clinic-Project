@@ -10,8 +10,9 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -62,11 +63,11 @@ public class AppoitmentQuary {
         return null;
     }
 
-    public ObservableList<Appoitment> getTodaysAppoitments(Date date) {
+    public List<Appoitment> getTodaysAppoitments(Date date) {
         try {
             getTodaysAppoitments.setDate(1, (java.sql.Date) date);
             ResultSet resultSet = getTodaysAppoitments.executeQuery();
-            ObservableList<Appoitment> result = FXCollections.observableArrayList();
+            List<Appoitment> result = new ArrayList<>();
             while (resultSet.next()) {
                 result.add(new Appoitment(resultSet.getInt("time"), resultSet.getDate("date"), resultSet.getInt("patiantID"),
                         resultSet.getString("patiantName"), resultSet.getInt("doctorID"), resultSet.getString("doctorName")));
