@@ -5,6 +5,7 @@
  */
 package AppCode;
 
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,9 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -97,7 +96,7 @@ public class ReceptionScreenController implements Initializable {
             outputMessage.setText("Empty TextField Detected");
         } else if (name.getText().matches(".*\\d.*")) {
             outputMessage.setText("Full-name Cannot Contain  Number");
-        }else if(number.getText().length()!=10){
+        } else if (number.getText().length() != 10) {
             outputMessage.setText("Number Must contain 10 numbers");
         } else {
             selectedDoc = doctorsComboBox.getSelectionModel().getSelectedIndex();
@@ -115,12 +114,46 @@ public class ReceptionScreenController implements Initializable {
         }
     }
 
+    public static String padRight(String s, int n) {
+        return String.format("%-" + n + "s", s);
+    }
+
+    public static String padLeft(String s, int n) {
+        return String.format("%" + n + "s", s);
+    }
+
     @FXML
     private void doctorsListButton(ActionEvent event) {
+
     }
 
     @FXML
     private void printDoctorsListButton(ActionEvent event) {
+        try {
+            File file = new File("D:\\1-Desktop\\uni\\Year 3\\Advanced Programming Practical\\Clinic Project\\Prints\\"
+                    + date.format(now) + " " + "Doctors Report" + ".txt");
+
+            FileWriter fileWrite = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(fileWrite);
+
+            for (int i = 0; i < listOfDocs.size(); i++) {
+                writer.write("--------------------------------\n");
+                writer.write("|                              |\n");
+                writer.write("|                              |\n");
+                writer.write("|Name: " + listOfDocs.get(i).getFullname() + "\n");
+                writer.write("|Field: " + listOfDocs.get(i).getField() + "\n");
+                writer.write("|                              |\n");
+                writer.write("|                              |\n");
+                writer.write("--------------------------------\n");
+            }
+
+            writer.close();
+            Desktop desktop = Desktop.getDesktop();
+            desktop.open(file);
+
+        } catch (IOException ex) {
+            System.out.println("error");
+        }
     }
 
     @FXML
