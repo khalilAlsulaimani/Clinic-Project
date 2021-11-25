@@ -113,20 +113,33 @@ public class ReceptionScreenController implements Initializable {
         } else if (name.getText().matches(".*\\d.*")) {
             outputMessage.setText("Full-name Cannot Contain  Number");
         } else if (number.getText().length() != 10) {
-            outputMessage.setText("Number Must contain 10 numbers");
+            outputMessage.setText("Number Must contain 10 numbers given number is " + number.getText().length());
+        } else if (!number.getText().startsWith("05")) {
+            outputMessage.setText("Number Must Start with 05");
+        } else if (Long.parseLong(number.getText()) > 2147483646) {
+            outputMessage.setText("Number Is Too Big");
+        } else if (Long.parseLong(id.getText()) > 2147483646) {
+            outputMessage.setText("ID Is Too Big");
+
         } else {
+
             selectedDoc = doctorsComboBox.getSelectionModel().getSelectedIndex();
-            int result = patiance.addPatiant(Integer.parseInt(id.getText()), name.getText(), listOfDocs.get(selectedDoc).getId(),
-                    Integer.parseInt(age.getText()), Integer.parseInt(number.getText()));
-            if (result == 1) {
-                outputMessage.setTextFill(Color.BLUE);
-                outputMessage.setText("Patiant Added Succfully");
-                clear();
+            try {
+                int result = patiance.addPatiant(Integer.parseInt(id.getText()), name.getText(), listOfDocs.get(selectedDoc).getId(),
+                        Integer.parseInt(age.getText()), Integer.parseInt(number.getText()));
+                if (result == 1) {
+                    outputMessage.setTextFill(Color.BLUE);
+                    outputMessage.setText("Patiant Added Succfully");
+                    clear();
+                } else {
+                    outputMessage.setText("Patiant Wasnt Added Succfully");
 
-            } else {
-                outputMessage.setText("Patiant Wasnt Added Succfully");
-
+                }
+            } catch (Exception e) {
+                outputMessage.setText("Error Occured With Either ID Or Number");
+                e.printStackTrace();
             }
+
         }
     }
 
