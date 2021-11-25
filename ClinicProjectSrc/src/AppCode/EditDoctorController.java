@@ -45,12 +45,17 @@ public class EditDoctorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
-    @FXML
-    private void clear(ActionEvent event) {
+    
+    private void clears(){
         docField.clear();
         docName.clear();
         docID.clear();
+        deleteDocID.clear();
+    }
+
+    @FXML
+    private void clear(ActionEvent event) {
+        clears();
     }
 
     @FXML
@@ -65,6 +70,7 @@ public class EditDoctorController implements Initializable {
             if (result == 1) {
                 addOutPutMessage.setTextFill(Color.BLUE);
                 addOutPutMessage.setText("Doctr Has Been Added");
+                clears();
             } else {
                 addOutPutMessage.setText("Doctr Has Not Been Added");
 
@@ -84,9 +90,10 @@ public class EditDoctorController implements Initializable {
             if (result == 1) {
                 deleteOutputMessage.setTextFill(Color.BLUE);
                 deleteOutputMessage.setText("Doctor Deleted");
+                clears();
 
             } else {
-                deleteOutputMessage.setText("A Error Occured Please Check ID");
+                deleteOutputMessage.setText("A Error Occured Please Check ID Or If Doctor Has Appoitments ");
 
             }
         }

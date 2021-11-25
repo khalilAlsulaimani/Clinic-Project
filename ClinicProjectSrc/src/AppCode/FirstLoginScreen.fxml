@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="AppCode.FirstLoginScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppCode.FirstLoginScreenController">
    <children>
       <GridPane layoutX="142.0" layoutY="115.0" prefHeight="170.0" prefWidth="316.0">
         <columnConstraints>
@@ -34,7 +33,7 @@
          </font>
       </Label>
       <Button layoutX="252.0" layoutY="320.0" mnemonicParsing="false" onAction="#changeDefultLogin" text="Apply Changes" />
-      <Label fx:id="outputMessage" alignment="CENTER" layoutX="137.0" layoutY="96.0" prefHeight="18.0" prefWidth="325.0" textFill="RED">
+      <Label fx:id="outputMessage" alignment="CENTER" layoutX="-1.0" layoutY="96.0" prefHeight="23.0" prefWidth="600.0" textFill="RED">
          <font>
             <Font name="Constantia" size="18.0" />
          </font>

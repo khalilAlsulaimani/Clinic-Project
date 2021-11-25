@@ -44,7 +44,7 @@ public class ManngerQuries {
             editPassword = connection.prepareStatement("UPDATE  clinicdb.mannger SET password =? where username = ?  ");
             addReceptionest = connection.prepareStatement("UPDATE clinicdb.mannger SET receptionistID =? WHERE username =?");
             getAllManggers = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  mannger");
-            addMannger = connection.prepareStatement("INSERT INTO clinicdb.mannger VALUES (?,?,NULL,?,?)");
+            addMannger = connection.prepareStatement("INSERT INTO clinicdb.mannger VALUES (?,?,NULL,?,?,1)");
             deleteMannger = connection.prepareStatement("DELETE FROM clinicdb.mannger WHERE username = ?");
             isFirstLogin = connection.prepareStatement("SELECT isFirstLogin from clinicdb.mannger WHERE username = ?");
             changeisFirstLogin = connection.prepareStatement("UPDATE clinicdb.mannger SET isFirstLogin = 0 WHERE username=?");

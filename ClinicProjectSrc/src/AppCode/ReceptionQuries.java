@@ -45,7 +45,7 @@ public class ReceptionQuries {
             editUsername = connection.prepareStatement("UPDATE  clinicdb.receptionist SET username =? where username = ?  ");
             editPassword = connection.prepareStatement("UPDATE  clinicdb.receptionist SET password =? where username = ?  ");
             addMannger = connection.prepareStatement("UPDATE clinicdb.receptionist SET manngerID =? WHERE username =?");
-            addReceptionest = connection.prepareStatement("INSERT INTO clinicdb.receptionist VALUES(?,?,NULL,?,?)");
+            addReceptionest = connection.prepareStatement("INSERT INTO clinicdb.receptionist VALUES(?,?,NULL,?,?,1)");
             getAllReps = connection.prepareStatement("SELECT COUNT(1) as numOfRows FROM  receptionist");
             isFirstLogin = connection.prepareStatement("SELECT isFirstLogin from clinicdb.receptionist WHERE username = ?");
             changeisFirstLogin = connection.prepareStatement("UPDATE clinicdb.receptionist SET isFirstLogin = 0 WHERE username=?");
