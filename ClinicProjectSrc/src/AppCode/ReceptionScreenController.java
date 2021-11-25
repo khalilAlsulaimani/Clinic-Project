@@ -27,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -67,6 +68,16 @@ public class ReceptionScreenController implements Initializable {
 
     ObservableList<Doctor> listOfDocs = FXCollections.observableArrayList();
     List<Appoitment> listOfAppoitments = new ArrayList<>();
+    @FXML
+    private Label errorLable;
+    @FXML
+    private Label foundName;
+    @FXML
+    private Label foundAge;
+    @FXML
+    private Label foundNumber;
+    @FXML
+    private TextField searchID;
 
     public void getRepsName(String username) {
         repsUsername = username;
@@ -90,6 +101,7 @@ public class ReceptionScreenController implements Initializable {
         age.clear();
         name.clear();
         id.clear();
+        searchID.clear();
 
     }
 
@@ -220,6 +232,43 @@ public class ReceptionScreenController implements Initializable {
             System.out.println("error");
 
         }
+    }
+
+    @FXML
+    private void searchForPatiant(ActionEvent event) {
+        foundName.setText("");
+        foundAge.setText("");
+        foundNumber.setText("");
+        errorLable.setTextFill(Color.RED);
+        if (searchID.getText().isBlank()) {
+            errorLable.setText("Empty TextField Detected");
+        } else {
+
+            Patiant result = patiance.getPatiant(Integer.parseInt(searchID.getText()));
+            if (result != null) {
+                errorLable.setTextFill(Color.BLUE);
+                errorLable.setText("Patiant Found Succfully");
+                foundName.setText(result.getFullName());
+                foundAge.setText(String.valueOf(result.getAge()));
+                foundNumber.setText(String.valueOf(result.getNumber()));
+                clear();
+
+            } else {
+                errorLable.setText("Patiant Wasnt Found");
+                clear();
+
+            }
+        }
+
+    }
+
+    @FXML
+    private void refresh(ActionEvent event) {
+        if (!listOfAppoitments.isEmpty()) {
+            listOfAppoitments.clear();
+            listOfAppoitments.addAll(appoitment.getTodaysAppoitments(Date.valueOf(date.format(now))));
+        }
+
     }
 
 }
