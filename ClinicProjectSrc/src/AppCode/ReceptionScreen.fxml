@@ -65,7 +65,7 @@
                         </GridPane>
                         <Button layoutX="31.0" layoutY="443.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
                         <Button layoutX="573.0" layoutY="230.0" mnemonicParsing="false" onAction="#addPatiant" prefHeight="26.0" prefWidth="58.0" text="Add" />
-                        <Label fx:id="outputMessage" alignment="CENTER" layoutX="-1.0" layoutY="60.0" prefHeight="18.0" prefWidth="698.0" textFill="RED">
+                        <Label fx:id="outputMessage" alignment="CENTER" layoutX="-4.0" layoutY="58.0" prefHeight="19.0" prefWidth="748.0" textFill="RED">
                            <font>
                               <Font name="Constantia" size="16.0" />
                            </font>

@@ -130,12 +130,15 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Enter Mannger ID  To Username :" />
+                        <Label text="Enter Mannger Username To Delete :" />
                         <TextField fx:id="deleteManngerUsername" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Button layoutX="571.0" layoutY="252.0" mnemonicParsing="false" onAction="#deleteMannger" text="Apply Change" AnchorPane.leftAnchor="650.0" />
-                  <Label fx:id="deleteOutputMessage" alignment="CENTER" layoutX="-5.0" layoutY="78.0" prefHeight="18.0" prefWidth="827.0" />
+                  <Label fx:id="deleteOutputMessage" alignment="CENTER" layoutX="-5.0" layoutY="78.0" prefHeight="18.0" prefWidth="827.0">
+                     <font>
+                        <Font name="Constantia" size="16.0" />
+                     </font></Label>
                </children></AnchorPane>
       </content>
     </Tab>

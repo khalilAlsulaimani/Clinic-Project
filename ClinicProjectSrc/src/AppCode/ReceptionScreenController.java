@@ -210,6 +210,10 @@ public class ReceptionScreenController implements Initializable {
 
     @FXML
     private void printAppoitment(ActionEvent event) {
+        if (listOfAppoitments.isEmpty()) {
+            listOfAppoitments.clear();
+            listOfAppoitments.addAll(appoitment.getTodaysAppoitments(Date.valueOf(date.format(now))));
+        }
 
         try {
 
@@ -277,7 +281,7 @@ public class ReceptionScreenController implements Initializable {
 
     @FXML
     private void refresh(ActionEvent event) {
-        if (!listOfAppoitments.isEmpty()) {
+        if (listOfAppoitments.isEmpty()) {
             listOfAppoitments.clear();
             listOfAppoitments.addAll(appoitment.getTodaysAppoitments(Date.valueOf(date.format(now))));
         }
